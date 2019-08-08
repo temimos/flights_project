@@ -65,8 +65,8 @@ public class JosephController {
     public String nameForm(Principal principal, Model model) {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = new Trip();
-        trip.setPassengers(4);
-        trip.setType(7L);
+        trip.setPassengers(2);
+        trip.setType(1L);
 
         tripRepository.save(trip);
 

@@ -16,14 +16,26 @@ public class TravelHelper {
 
     static long convertToNumber(String name) {
         name = name.toLowerCase();
-        if (name.equals("economy")) {
+        if (name.startsWith("economy")) {
             return 1;
-        } else if (name.equals("first")) {
+        } else if (name.startsWith("first")) {
             return 2;
-        } else if (name.equals("business")) {
+        } else if (name.startsWith("business")) {
             return 3;
         } else {
             return -1;
+        }
+    }
+
+    static String convertToString(long number) {
+        if (number == 1) {
+            return "Economy";
+        } else if (number == 2) {
+            return "First Class";
+        } else if (number == 3) {
+            return "Business";
+        } else {
+            return "Unknown";
         }
     }
 
