@@ -27,15 +27,13 @@ public class UserLoader implements CommandLineRunner {
         Role userRole = roleRepository.save(new Role("USER"));
         Role adminRole = roleRepository.save(new Role("ADMIN"));
 
-        User user = new User("John", "Smith", "john@gmail.com",
-                "john", "password", "883-655 Piacquadio Rd, Margaretville, NY 12455",
-                "John Smith 1111-2222-3333-4444 12/19");
+        User user = new User("John", "Smith", "12/19/2019", "United States",
+                "john@gmail.com", "301-345-6789", "john", "password");
         user.setRoles(Arrays.asList(userRole));
         userRepository.save(user);
 
-        user = new User("Admin", "Admin", "admin@samazon.com",
-                "admin", "password", "473-323 Forest Ave, Georgetown, SC 29440",
-                "Admin 1111-2222-3333-4444 5/23");
+        user = new User("Admin", "Admin", "05/08/2019", "United States",
+                "admin@admin.com", "301-777-8888", "admin", "password");
         user.setRoles(Arrays.asList(adminRole));
         userRepository.save(user);
     }
