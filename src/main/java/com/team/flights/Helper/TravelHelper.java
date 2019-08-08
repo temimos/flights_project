@@ -1,0 +1,77 @@
+package com.team.flights.Helper;
+
+import com.team.flights.Beans.Flight;
+
+import java.util.ArrayList;
+
+public class TravelHelper {
+
+//    1 = E
+//    2 = F
+//    3 = B
+//    4 = E + F
+//    5 = F + B
+//    6 = E + B
+//    7 = E + F + B
+
+    static long convertToNumber(String name) {
+        name = name.toLowerCase();
+        if (name.equals("economy")) {
+            return 1;
+        } else if (name.equals("first")) {
+            return 2;
+        } else if (name.equals("business")) {
+            return 3;
+        } else {
+            return -1;
+        }
+    }
+
+    static boolean isAvailable(long request, long planeType) {
+        ArrayList<Long> eco = new ArrayList<>();
+        eco.add(1L);
+        eco.add(4L);
+        eco.add(6L);
+        eco.add(7L);
+        ArrayList<Long> first = new ArrayList<>();
+        first.add(2L);
+        first.add(4L);
+        first.add(5L);
+        first.add(7L);
+        ArrayList<Long> business = new ArrayList<>();
+        business.add(3L);
+        business.add(5L);
+        business.add(6L);
+        business.add(7L);
+        if (eco.contains(request) && eco.contains(planeType)) {
+            return true;
+        }
+        else if (first.contains(request) && first.contains(planeType)) {
+            return true;
+        }
+        else if (business.contains(request) && business.contains(planeType)) {
+            return true;
+        }
+        return false;
+    }
+
+    static ArrayList<String> getToLocations(ArrayList<Flight> flights) {
+        ArrayList<String> locations = new ArrayList<>();
+        for (Flight flight : flights) {
+            if (!locations.contains(flight.getToLocation())) {
+                locations.add(flight.getToLocation());
+            }
+        }
+        return locations;
+    }
+
+    static ArrayList<String> getFromLocations(ArrayList<Flight> flights) {
+        ArrayList<String> locations = new ArrayList<>();
+        for (Flight flight : flights) {
+            if (!locations.contains(flight.getFromLocation())) {
+                locations.add(flight.getFromLocation());
+            }
+        }
+        return locations;
+    }
+}

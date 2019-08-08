@@ -138,24 +138,4 @@ public class JosephController {
         tripRepository.save(trip);
         return "redirect:/boardingPass";
     }
-
-    ArrayList<String> getToLocations() {
-        ArrayList<String> locations = new ArrayList<>();
-        for (Flight flight : flightRepository.findAll()) {
-            if (!locations.contains(flight.getToLocation())) {
-                locations.add(flight.getToLocation());
-            }
-        }
-        return locations;
-    }
-
-    ArrayList<String> getFromLocations() {
-        ArrayList<String> locations = new ArrayList<>();
-        for (Flight flight : flightRepository.findAll()) {
-            if (!locations.contains(flight.getFromLocation())) {
-                locations.add(flight.getFromLocation());
-            }
-        }
-        return locations;
-    }
 }
