@@ -43,7 +43,7 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.username = username;
-        this.password = password;
+        setPassword(password);
     }
 
     public User() {
@@ -118,7 +118,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 
     public Collection<Role> getRoles() {
