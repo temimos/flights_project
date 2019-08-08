@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="base::header">
+<body>
+<div th:replace="base::nav"></div>
+<div class="container">
+    <div class = "main">
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+        <div class="container rounded">
+            <h1>Please Review Your Trip Order:</h1><br/>
+            <hr>
+            <h4>Personal Details:</h4>
+            <hr>
+            <div class="card m-2" style="width: 17rem;"  th:each="user : ${users}">
+                <label>
+                    <div class="panel panel-default card-input">
+                        <div class="card-header bg-info text-white">Name: <td th:text = "${user.firstName}"/> <td th:text = "${user.lastName}"/></div></br>
+                        <div class="card-body">
+                            <div class="panel-heading">DOB: <td th:text = "${user.birthDate}"></div></br>
+                            <div class="panel-heading">Email: <td th:text = "${user.email}"></div></br>
+                            <div class="panel-heading">Phone: <td th:text = "${user.phone}"></div></br>
+                        </div>
+                    </div>
+                </label>
+            </div>
+            <hr>
+            <h4>Your Flight Details:</h4>
+            <hr>
+            <div class="card m-2" style="width: 17rem;"  th:each="trip : ${trip}">
+                <label>
+                    <div class="panel panel-default card-input">
+                        <div class="card-header bg-info text-white"></div></br>
+                        <div class="card-body">
+                            <div class="panel-heading">Flight Type: <td th:text = "${trip.type}"></div></br>
+                            <div class="panel-heading">Passengers: <td th:text = "${trip.passengers}"></div></br>
+                            <div class="panel-heading">To Location: <td th:text = "${trip.flightToId}"></div></br>
+                            <div class="panel-heading">From Location: <td th:text = "${trip.flightFromId}"></div></br>
+                        </div>
+                    </div>
+                </label>
+            </div>
+            <hr>
+            <h4>Payment Details:</h4>
+            <hr>
+            <div class="card m-2" style="width: 17rem;"  th:each="trip : ${trip}">
+                <label>
+                    <div class="panel panel-default card-input">
+                        <div class="card-header bg-info text-white"></div></br>
+                        <div class="card-body">
+                            <div class="panel-heading">Credit Card: <td th:text = "${trip.creditcard}"></div></br>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <p><a class="btn btn-primary" href="/processfinalize">Finalize</a> <a class="btn btn-primary" href="/">Cancel</a></p>
+</div>
+</body>
+</html>
