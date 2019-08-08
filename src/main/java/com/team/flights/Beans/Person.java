@@ -39,6 +39,11 @@ public class Person {
         this.tripId = tripId;
     }
 
+    public Person(String name, long tripId) {
+        this.name = name;
+        this.tripId = tripId;
+    }
+
     public Person(){
     }
 }

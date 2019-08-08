@@ -63,26 +63,61 @@ public class JosephController {
     @RequestMapping("/form")
     public String nameForm(Principal principal, Model model) {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
-        Trip trip = tripRepository.findByUserId(user.getId());
+        Trip trip = new Trip();
+        trip.setPassengers(4);
+        tripRepository.save(trip);
+
+        ArrayList<Person> persons = new ArrayList<>();
+
+        persons.add(new Person("", trip.getId()));
+
+        if (trip.getPassengers() == 1) {
+            model.addAttribute("btnText", "Finish - View Order");
+        } else {
+            model.addAttribute("btnText", "Add Person #2");
+        }
+
+        model.addAttribute("list", persons);
+        model.addAttribute("id", trip.getId());
+
+        return "form";
+    }
+
+    @PostMapping("/addName")
+    public String addName(@RequestParam(name = "id") long id,
+                          @RequestParam(name = "person") String name, Principal principal, Model model) {
+        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        Person person = new Person();
+        person.setName(name);
+        person.setTripId(id);
+        personRepository.save(person);
+        Trip trip = tripRepository.findById(id);
         if (trip == null) {
             return "/";
         } else {
             ArrayList<Person> finished = personRepository.findAllByTripId(trip.getId());
             ArrayList<Person> persons = new ArrayList<>();
-            long size = 1;
+            long size = 0;
             if (finished != null) {
-                size = Math.min((finished.size() + 1), trip.getPassengers());
+                size = finished.size();
+                persons.addAll(finished);
+                if (finished.size() >= trip.getPassengers()) {
+                    model.addAttribute("people", finished);
+                    model.addAttribute("trip", trip);
+                    return "summary";
+                }
             }
-            if (size > trip.getPassengers()) {
+            //for (int i = 0; i < size; i++) {
+            persons.add(new Person("", trip.getId()));
+            //}
+            if (size + 1 >= trip.getPassengers()) {
+                model.addAttribute("btnText", "Finish - View Order");
+            } else {
+                model.addAttribute("btnText", "Add Person #" + (size + 2));
+            }
 
-                model.addAttribute("people", finished);
-                model.addAttribute("trip", trip);
-                return "summary";
-            }
-            for (int i = 0; i < size; i++) {
-                persons.add(new Person());
-            }
             model.addAttribute("list", persons);
+            model.addAttribute("id", trip.getId());
         }
         return "form";
     }
