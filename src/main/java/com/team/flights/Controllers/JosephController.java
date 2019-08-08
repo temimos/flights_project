@@ -1,5 +1,6 @@
 package com.team.flights.Controllers;
 
+import com.team.flights.Beans.Flight;
 import com.team.flights.Beans.Person;
 import com.team.flights.Beans.Trip;
 import com.team.flights.Beans.User;
@@ -74,9 +75,11 @@ public class JosephController {
         if (trip.getPassengers() == 1) {
             model.addAttribute("btnText", "Finish - View Order");
         } else {
-            model.addAttribute("btnText", "Add Person #2");
+            model.addAttribute("btnText", "Add Person");
         }
 
+        model.addAttribute("num", 0);
+        model.addAttribute("total", trip.getPassengers());
         model.addAttribute("list", persons);
         model.addAttribute("id", trip.getId());
 
@@ -113,12 +116,34 @@ public class JosephController {
             if (size + 1 >= trip.getPassengers()) {
                 model.addAttribute("btnText", "Finish - View Order");
             } else {
-                model.addAttribute("btnText", "Add Person #" + (size + 2));
+                model.addAttribute("btnText", "Add Person");
             }
 
+            model.addAttribute("num", size);
+            model.addAttribute("total", trip.getPassengers());
             model.addAttribute("list", persons);
             model.addAttribute("id", trip.getId());
         }
         return "form";
+    }
+
+    ArrayList<String> getToLocations() {
+        ArrayList<String> locations = new ArrayList<>();
+        for (Flight flight : flightRepository.findAll()) {
+            if (!locations.contains(flight.getToLocation())) {
+                locations.add(flight.getToLocation());
+            }
+        }
+        return locations;
+    }
+
+    ArrayList<String> getFromLocations() {
+        ArrayList<String> locations = new ArrayList<>();
+        for (Flight flight : flightRepository.findAll()) {
+            if (!locations.contains(flight.getFromLocation())) {
+                locations.add(flight.getFromLocation());
+            }
+        }
+        return locations;
     }
 }
