@@ -110,7 +110,7 @@ public class JosephController {
                     model.addAttribute("people", finished);
                     model.addAttribute("trip", trip);
                     model.addAttribute("id", trip.getId());
-                    return "payment";
+                    return "creditcard";
                 }
             }
             //for (int i = 0; i < size; i++) {

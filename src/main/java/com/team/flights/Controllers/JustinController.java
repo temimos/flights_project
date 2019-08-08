@@ -49,27 +49,24 @@ public class JustinController {
                                      @RequestParam(value = "creditcardnumber",required=false) String creditcardnumber,
                                      @RequestParam(value = "cvv",required=false) String cvv,
                                      @RequestParam(value = "expirationdate",required=false) String expirationdate,
+                                     @RequestParam(name = "id",required=false) long id,
                                      Model model, Principal principal){
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
-        Trip trip = tripRepository.findByUserId(user.getId());
+        System.out.println(id);
+        Trip trip = tripRepository.findById(id);
         String data = name+" ,"+creditcardnumber+" ,"+cvv+" ,"+expirationdate;
         trip.setCreditCard(data);
+        model.addAttribute("id", trip.getId());
         tripRepository.save(trip);
-        return "redirect:/";
+        return "/finalize";
     }
     //------------------------------------------------------------------------------------------------------------------
     @RequestMapping("/finalize")
-    public String loadFinalizePage(Principal principal, Model model) {
+    public String loadFinalizePage(Principal principal, Model model,@RequestParam(name = "id",required=false) long id) {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
-        Trip trip = tripRepository.findByUserId(user.getId());
+        Trip trip = tripRepository.findById(id);
         model.addAttribute("trips", trip);
         model.addAttribute("user",user);
         model.addAttribute("users", user);
         return "finalize";
-    }
-
-    @RequestMapping("/processfinalize")
-    public String processFinalizePage() {
-        return "redirect:/";
     }
 }
