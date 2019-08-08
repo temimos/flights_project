@@ -65,7 +65,9 @@ public class JosephController {
     public String nameForm(Principal principal, Model model) {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = new Trip();
-        trip.setPassengers(4);
+        trip.setPassengers(2);
+        trip.setType(1L);
+
         tripRepository.save(trip);
 
         ArrayList<Person> persons = new ArrayList<>();
@@ -107,7 +109,8 @@ public class JosephController {
                 if (finished.size() >= trip.getPassengers()) {
                     model.addAttribute("people", finished);
                     model.addAttribute("trip", trip);
-                    return "summary";
+                    model.addAttribute("id", trip.getId());
+                    return "creditcard";
                 }
             }
             //for (int i = 0; i < size; i++) {
@@ -127,23 +130,12 @@ public class JosephController {
         return "form";
     }
 
-    ArrayList<String> getToLocations() {
-        ArrayList<String> locations = new ArrayList<>();
-        for (Flight flight : flightRepository.findAll()) {
-            if (!locations.contains(flight.getToLocation())) {
-                locations.add(flight.getToLocation());
-            }
-        }
-        return locations;
-    }
-
-    ArrayList<String> getFromLocations() {
-        ArrayList<String> locations = new ArrayList<>();
-        for (Flight flight : flightRepository.findAll()) {
-            if (!locations.contains(flight.getFromLocation())) {
-                locations.add(flight.getFromLocation());
-            }
-        }
-        return locations;
+    @PostMapping("/processFinalize")
+    public String addName(@RequestParam(name = "id") long id, Principal principal, Model model) {
+        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        Trip trip = tripRepository.findById(id);
+        trip.setUserId(user.getId());
+        tripRepository.save(trip);
+        return "redirect:/boardingPass";
     }
 }

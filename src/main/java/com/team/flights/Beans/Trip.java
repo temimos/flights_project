@@ -10,7 +10,7 @@ public class Trip {
     private long id;
 
     @Column(name = "type")
-    private String type;
+    private long type;
 
     @Column(name = "passengers")
     private long passengers;
@@ -35,11 +35,11 @@ public class Trip {
         this.id = id;
     }
 
-    public String getType() {
+    public long getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(long type) {
         this.type = type;
     }
 
@@ -82,7 +82,7 @@ public class Trip {
     public void setFlightFromId(long flightFromId) {
         this.flightFromId = flightFromId;
     }
-    public Trip(String type, long passengers, String creditCard, long userId, long flightToId, long flightFromId) {
+    public Trip(long type, long passengers, String creditCard, long userId, long flightToId, long flightFromId) {
         this.type = type;
         this.passengers = passengers;
         this.creditCard = creditCard;

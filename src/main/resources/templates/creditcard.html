@@ -12,6 +12,7 @@
         <div class="container rounded">
             <h1>Enter Your Payment Details:</h1><br/>
             <form action="#" th:action="@{/processpayment}" method="post">
+                <input hidden th:value="${id}" id="id" name="id"/>
                 <div class="form-group">
                     <p>Card Holder's Name:</p>
                     <p><input class="form-control" type="text" name ="name"></p>
