@@ -66,6 +66,8 @@ public class JosephController {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = new Trip();
         trip.setPassengers(4);
+        trip.setType(7L);
+
         tripRepository.save(trip);
 
         ArrayList<Person> persons = new ArrayList<>();
@@ -107,7 +109,8 @@ public class JosephController {
                 if (finished.size() >= trip.getPassengers()) {
                     model.addAttribute("people", finished);
                     model.addAttribute("trip", trip);
-                    return "summary";
+                    model.addAttribute("id", trip.getId());
+                    return "payment";
                 }
             }
             //for (int i = 0; i < size; i++) {
