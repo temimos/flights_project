@@ -71,4 +71,14 @@ public class Trip {
     public void setFlightId(long flightId) {
         this.flightId = flightId;
     }
+
+    public Trip(String type, long passengers, String creditCard, long userId, long flightId) {
+        this.type = type;
+        this.passengers = passengers;
+        this.creditCard = creditCard;
+        this.userId = userId;
+        this.flightId = flightId;
+    }
+    public Trip() {
+    }
 }

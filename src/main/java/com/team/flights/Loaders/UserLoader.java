@@ -1,4 +1,4 @@
-package com.team.flights;
+package com.team.flights.Loaders;
 
 import com.team.flights.Beans.Role;
 import com.team.flights.Beans.User;
