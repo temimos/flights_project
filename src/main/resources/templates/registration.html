@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+</head>
+<body>
+    <div class="container">
+    <h4>New User Registration</h4>
+    <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
+        <label>First Name</label>
+        <strong><span th:if="${#fields.hasErrors('firstName')}">First Name Error</span></strong>
+        <input class="form-control" type="text" id="firstName" placeholder="First Name" th:field="*{firstName}" /><br />
+
+        <label>Last Name</label>
+        <strong><span th:if="${#fields.hasErrors('lastName')}">Last Name Error</span></strong>
+        <input class="form-control" type="text" id="lastName" placeholder="Last Name" th:field="*{lastName}" /><br />
+
+        <label>E-mail</label>
+        <strong><span th:if="${#fields.hasErrors('email')}">E-mail Error</span></strong>
+        <input class="form-control" type="text" id="email" placeholder="example@place.com" th:field="*{birthDate}" /><br />
+
+        <label>E-mail</label>
+        <strong><span th:if="${#fields.hasErrors('country')}">E-mail Error</span></strong>
+        <input class="form-control" type="text" id="country" placeholder="example@place.com" th:field="*{country}" /><br />
+
+        <label>E-mail</label>
+        <strong><span th:if="${#fields.hasErrors('email')}">E-mail Error</span></strong>
+        <input class="form-control" type="text" id="email" placeholder="example@place.com" th:field="*{email}" /><br />
+
+        <label>Phone Number</label>
+        <strong><span th:if="${#fields.hasErrors('phone')}">Phone Number Error</span></strong>
+        <input class="form-control" type="text" id="phone" placeholder="301-456-789" th:field="*{phone}" /><br />
+
+        <label>Username</label>
+        <strong><span th:if="${#fields.hasErrors('username')}">Username Error</span></strong>
+        <input class="form-control" type="text" id="username" placeholder="Username" th:field="*{username}" /><br />
+
+        <label>Password</label>
+        <strong><span th:if="${#fields.hasErrors('password')}">Password Error</span></strong>
+        <input class="form-control" type="password" id="password" placeholder="Password" th:field="*{password}" /><br />
+
+        <label>Address</label>
+        <strong><span th:if="${#fields.hasErrors('address')}">Address Error</span></strong>
+        <input class="form-control" type="text" id="address" placeholder="Address" th:field="*{address}" /><br />
+
+        <label>Credit Card</label>
+        <strong><span th:if="${#fields.hasErrors('creditCard')}">Credit Card Error</span></strong>
+        <input class="form-control" type="text" id="creditCard" placeholder="Address" th:field="*{creditCard}" /><br />
+
+        <button type="submit" class="btn btn-primary btn-lg" >Finish</button>
+    </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
