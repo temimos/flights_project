@@ -38,5 +38,8 @@ public class Person {
     public void setTripId(long tripId) {
         this.tripId = tripId;
     }
+
+    public Person(){
+    }
 }
 

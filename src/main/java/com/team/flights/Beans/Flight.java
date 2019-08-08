@@ -1,7 +1,6 @@
 package com.team.flights.Beans;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 @Table(name="Flight_Data")
@@ -14,7 +13,7 @@ public class Flight {
     private String toLocation;
 
     @Column(name = "from_location")
-    private long fromLocation;
+    private String fromLocation;
 
     @Column(name = "date")
     private String date;
@@ -28,8 +27,8 @@ public class Flight {
     @Column(name = "flight_class")
     private long flightClass;
 
-    @Column(name = "avaliable_seats")
-    private long avaliableSeats;
+    @Column(name = "available_seats")
+    private long availableSeats;
 
     @Column(name = "user_id")
     private long userId;
@@ -53,11 +52,11 @@ public class Flight {
         this.toLocation = toLocation;
     }
 
-    public long getFromLocation() {
+    public String getFromLocation() {
         return fromLocation;
     }
 
-    public void setFromLocation(long fromLocation) {
+    public void setFromLocation(String fromLocation) {
         this.fromLocation = fromLocation;
     }
 
@@ -93,14 +92,6 @@ public class Flight {
         this.flightClass = flightClass;
     }
 
-    public long getAvaliableSeats() {
-        return avaliableSeats;
-    }
-
-    public void setAvaliableSeats(long avaliableSeats) {
-        this.avaliableSeats = avaliableSeats;
-    }
-
     public long getUserId() {
         return userId;
     }
@@ -115,5 +106,29 @@ public class Flight {
 
     public void setTripId(long tripId) {
         this.tripId = tripId;
+    }
+
+    public long getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(long availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    public Flight(String toLocation, String fromLocation, String date, String departingTime, String arrivalTime,
+                  long flightClass, long availableSeats, long userId, long tripId){
+        this.toLocation = toLocation;
+        this.fromLocation = fromLocation;
+        this.date = date;
+        this.departingTime = departingTime;
+        this.arrivalTime = arrivalTime;
+        this.flightClass = flightClass;
+        this.availableSeats = availableSeats;
+        this.userId = userId;
+        this.tripId = tripId;
+    }
+
+    public Flight() {
     }
 }

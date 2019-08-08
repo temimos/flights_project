@@ -1,5 +1,9 @@
-package com.team.flights;
+package com.team.flights.Loaders;
 
+import com.team.flights.Beans.Role;
+import com.team.flights.Beans.User;
+import com.team.flights.Repositories.RoleRepository;
+import com.team.flights.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
