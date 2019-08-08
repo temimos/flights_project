@@ -130,6 +130,15 @@ public class JosephController {
         return "form";
     }
 
+    @PostMapping("/processFinalize")
+    public String addName(@RequestParam(name = "id") long id, Principal principal, Model model) {
+        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        Trip trip = tripRepository.findById(id);
+        trip.setUserId(user.getId());
+        tripRepository.save(trip);
+        return "redirect:/boardingPass";
+    }
+
     ArrayList<String> getToLocations() {
         ArrayList<String> locations = new ArrayList<>();
         for (Flight flight : flightRepository.findAll()) {
