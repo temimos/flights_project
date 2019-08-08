@@ -1,4 +1,4 @@
-package com.team.flights;
+package com.team.flights.Controllers;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;

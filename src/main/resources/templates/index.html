@@ -11,9 +11,59 @@
 <div th:replace="base::nav"></div>
 <div class="container">
     <div class="jumbotron lead text-center">
-        <h2> Index </h2>
+
+        <p>
+           From:  <select id="percentage" name="percentage">
+                <option value="0">0</option>
+                ...
+                <option value="74">74</option>
+                <option value="75" selected="selected">75</option>
+                <option value="76">76</option>
+                ...
+                <option value="100">100</option>
+            </select>
+        </p>
     </div>
 </div>
+<form>
+    <div class="form-row align-items-center">
+        <div class="col-auto my-1">
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                <option selected>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="col-auto my-1">
+            <div class="custom-control custom-checkbox mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--<form action="#" enctype="multipart/form-data" method="post"-->
+<!--      th:action="@{/process}" th:object="${flight}">-->
+
+<!--    &lt;!&ndash;Hidden properties&ndash;&gt;-->
+<!--    <input th:field="*{id}" type="hidden"/>-->
+
+<!--    <input th:field="*{user}" th:value="${user}" type="hidden">-->
+
+<!--    <div class="text-left">-->
+<!--        <div class="form-group row">-->
+<!--            <label class="col-sm-2 col-form-label" for="title">Title:</label>-->
+<!--            <div class="col-sm-10">-->
+<!--                <input class="form-control" id="title" placeholder="Enter Title"-->
+<!--                       th:field="*{date}" type="text"/>-->
+<!--                <span class="error-message" th:errors="*{date}" th:if="${#fields.hasErrors('date')}"></span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
 </body>
 
 </head>
