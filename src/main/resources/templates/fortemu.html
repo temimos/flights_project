@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="projectname">Project Name</label>
+    <div class="col-sm-10 text-left">
+        <select class="form-control" name = "projectname">
+            <div th:each="project : ${projects}">
+                <option id="projectname" th:text="${project.projectname}"></option>
+            </div>
+        </select>
+        <strong>
+                        <span class="error-message"
+                              th:errors="*{project}"
+                              th:if="${#fields.hasErrors('project')}">Project Name Error
+                        </span>
+        </strong>
+    </div>
+</div>
+
+
+</body>
+</html>

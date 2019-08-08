@@ -21,8 +21,11 @@ public class Trip {
     @Column(name = "user_id")
     private long userId;
 
-    @Column(name = "flight_id")
-    private long flightId;
+    @Column(name = "flightTo_id")
+    private long flightToId;
+
+    @Column(name = "flightFrom_id")
+    private long flightFromId;
 
     public long getId() {
         return id;
@@ -64,20 +67,28 @@ public class Trip {
         this.userId = userId;
     }
 
-    public long getFlightId() {
-        return flightId;
+    public long getFlightToId() {
+        return flightToId;
     }
 
-    public void setFlightId(long flightId) {
-        this.flightId = flightId;
+    public void setFlightToId(long flightToId) {
+        this.flightToId = flightToId;
     }
 
-    public Trip(String type, long passengers, String creditCard, long userId, long flightId) {
+    public long getFlightFromId() {
+        return flightFromId;
+    }
+
+    public void setFlightFromId(long flightFromId) {
+        this.flightFromId = flightFromId;
+    }
+    public Trip(String type, long passengers, String creditCard, long userId, long flightToId, long flightFromId) {
         this.type = type;
         this.passengers = passengers;
         this.creditCard = creditCard;
         this.userId = userId;
-        this.flightId = flightId;
+        this.flightToId = flightToId;
+        this.flightFromId = flightFromId;
     }
     public Trip() {
     }
