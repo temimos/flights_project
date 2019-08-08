@@ -44,8 +44,8 @@ public class JustinController {
         return "creditcard";
     }
 
-    @RequestMapping("/processpayment")
-    public @ResponseBody String processPaymentForm(@RequestParam(value = "name",required=false) String name,
+    @PostMapping("/processpayment")
+    public String processPaymentForm(@RequestParam(value = "name",required=false) String name,
                                      @RequestParam(value = "creditcardnumber",required=false) String creditcardnumber,
                                      @RequestParam(value = "cvv",required=false) String cvv,
                                      @RequestParam(value = "expirationdate",required=false) String expirationdate,
@@ -55,8 +55,21 @@ public class JustinController {
         String data = name+" ,"+creditcardnumber+" ,"+cvv+" ,"+expirationdate;
         trip.setCreditCard(data);
         tripRepository.save(trip);
-        return "data";
+        return "redirect:/";
     }
     //------------------------------------------------------------------------------------------------------------------
+    @RequestMapping("/finalize")
+    public String loadFinalizePage(Principal principal, Model model) {
+        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        Trip trip = tripRepository.findByUserId(user.getId());
+        model.addAttribute("trips", trip);
+        model.addAttribute("user",user);
+        model.addAttribute("users", user);
+        return "finalize";
+    }
 
+    @RequestMapping("/processfinalize")
+    public String processFinalizePage() {
+        return "redirect:/";
+    }
 }
