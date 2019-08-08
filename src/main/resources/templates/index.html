@@ -11,39 +11,141 @@
 <div th:replace="base::nav"></div>
 <div class="container">
     <div class="jumbotron lead text-center">
+        <h1>
+           Flight tickets to anywhere in the US and around the world
+        </h1>
+        <br />
 
-        <p>
-           From:  <select id="percentage" name="percentage">
-                <option value="0">0</option>
-                ...
-                <option value="74">74</option>
-                <option value="75" selected="selected">75</option>
-                <option value="76">76</option>
-                ...
-                <option value="100">100</option>
-            </select>
-        </p>
-    </div>
-</div>
-<form>
-    <div class="form-row align-items-center">
-        <div class="col-auto my-1">
-            <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
+<tr>
+<!--    th:each="flight : ${flights}" th:object="${flight}">-->
+    <form>
+
+
+        <!-- Default inline 1-->
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample">
+            <label class="custom-control-label" for="defaultInline1">One Way</label>
         </div>
-        <div class="col-auto my-1">
-            <div class="custom-control custom-checkbox mr-sm-2">
-                <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+
+        <!-- Default inline 2-->
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
+            <label class="custom-control-label" for="defaultInline2">Round Trip</label>
+        </div>
+        <br/>
+<br/>
+        <td>
+<!--            <div class="col-md-8 mb-3">-->
+                <div class="col-md-8 mb-3 custom-control-inline">
+<!--            <div class="col-auto ">-->
+                <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
             </div>
-        </div>
-    </div>
-</form>
+            <br />
+
+        </td>
+        <br />
+
+    <td>
+        <div class="col-md-8 mb-3 custom-control-inline">
+            <!--            <div class="col-auto ">-->
+            <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect2">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+
+        <br />
+        <br />
+
+    </td>
+
+    <td>
+            <div class="col-md-8 mb-3 custom-control-inline">
+                <!--            <div class="col-auto ">-->
+                <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        <br />
+        <br />
+
+    </td>
+
+    <td>
+            <div class="col-md-8 mb-3 custom-control-inline">
+                <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect4">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        <br />
+        <br />
+
+    </td>
+
+    <td>
+
+            <div class="col-md-8 mb-3 custom-control-inline">
+                <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect5">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        <br />
+        <br />
+
+    </td>
+    </form>
+
+</tr>
+</div>
+
+
+
+
+
+
+
+
+
+<!--<div class="form-group row">-->
+<!--    <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>-->
+<!--    <div class="col-sm-10 text-left">-->
+<!--        <select class="form-control" name = "ToLocation">-->
+<!--&lt;!&ndash;            <span th:text="${user.firstName} +' ' +${user.lastName}"></span><br/>&ndash;&gt;-->
+<!--            <div th:each="flight : ${flights}">-->
+<!--                <option id="projectname" th:text="${flight.ToLocation}"></option>-->
+<!--            </div>-->
+<!--        </select>-->
+<!--        <strong>-->
+<!--                        <span class="error-message"-->
+<!--                              th:errors="*{flight}"-->
+<!--                              th:if="${#fields.hasErrors('flight')}">Project Name Error-->
+<!--                        </span>-->
+<!--        </strong>-->
+<!--    </div>-->
+<!--</div>-->
+
+
 
 <!--<form action="#" enctype="multipart/form-data" method="post"-->
 <!--      th:action="@{/process}" th:object="${flight}">-->

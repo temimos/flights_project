@@ -4,6 +4,7 @@ import com.team.flights.Beans.Flight;
 import org.springframework.data.repository.CrudRepository;
 
 public interface FlightRepository extends CrudRepository<Flight,Long> {
+    Flight findAllByToLocation(String location);
     Flight findById(long id);
     Flight findByUserId(long id);
     Flight findByTripId(long id);
