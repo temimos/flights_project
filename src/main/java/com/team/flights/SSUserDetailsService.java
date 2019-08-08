@@ -1,5 +1,8 @@
 package com.team.flights;
 
+import com.team.flights.Beans.Role;
+import com.team.flights.Beans.User;
+import com.team.flights.Repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

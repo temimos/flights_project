@@ -1,4 +1,4 @@
-package com.team.flights;
+package com.team.flights.Beans;
 
 import javax.persistence.*;
 import java.util.Collection;

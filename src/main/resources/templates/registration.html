@@ -17,12 +17,12 @@
         <strong><span th:if="${#fields.hasErrors('lastName')}">Last Name Error</span></strong>
         <input class="form-control" type="text" id="lastName" placeholder="Last Name" th:field="*{lastName}" /><br />
 
-        <label>E-mail</label>
-        <strong><span th:if="${#fields.hasErrors('email')}">E-mail Error</span></strong>
-        <input class="form-control" type="text" id="email" placeholder="example@place.com" th:field="*{birthDate}" /><br />
+        <label>Date of Birth</label>
+        <strong><span th:if="${#fields.hasErrors('birthDate')}">Date Error</span></strong>
+        <input class="form-control" type="text" id="birthDate" placeholder="example@place.com" th:field="*{birthDate}" /><br />
 
-        <label>E-mail</label>
-        <strong><span th:if="${#fields.hasErrors('country')}">E-mail Error</span></strong>
+        <label>Country</label>
+        <strong><span th:if="${#fields.hasErrors('country')}">Country Error</span></strong>
         <input class="form-control" type="text" id="country" placeholder="example@place.com" th:field="*{country}" /><br />
 
         <label>E-mail</label>
@@ -40,14 +40,6 @@
         <label>Password</label>
         <strong><span th:if="${#fields.hasErrors('password')}">Password Error</span></strong>
         <input class="form-control" type="password" id="password" placeholder="Password" th:field="*{password}" /><br />
-
-        <label>Address</label>
-        <strong><span th:if="${#fields.hasErrors('address')}">Address Error</span></strong>
-        <input class="form-control" type="text" id="address" placeholder="Address" th:field="*{address}" /><br />
-
-        <label>Credit Card</label>
-        <strong><span th:if="${#fields.hasErrors('creditCard')}">Credit Card Error</span></strong>
-        <input class="form-control" type="text" id="creditCard" placeholder="Address" th:field="*{creditCard}" /><br />
 
         <button type="submit" class="btn btn-primary btn-lg" >Finish</button>
     </form>

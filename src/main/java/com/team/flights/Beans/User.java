@@ -1,6 +1,4 @@
-package com.team.flights;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+package com.team.flights.Beans;
 
 import javax.persistence.*;
 import java.util.Collection;
