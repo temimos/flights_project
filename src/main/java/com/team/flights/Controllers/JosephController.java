@@ -18,6 +18,7 @@ import java.lang.reflect.Array;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 @Controller
 public class JosephController {
@@ -137,5 +138,27 @@ public class JosephController {
         trip.setUserId(user.getId());
         tripRepository.save(trip);
         return "redirect:/boardingPass";
+    }
+
+    @RequestMapping("/boardingPass")
+    public String boardingPass(Principal principal, Model model) {
+        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
+        model.addAttribute("list", trips);
+        HashMap<Long, String> datesTo = new HashMap<>();
+        HashMap<Long, String> datesFrom = new HashMap<>();
+        for (Trip trip : trips) {
+            long toId = trip.getFlightToId();
+            long fromId = trip.getFlightFromId();
+            if (toId != 0) {
+                datesTo.put(toId, flightRepository.findById(toId).getDate());
+            }
+            if (fromId != 0) {
+                datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
+            }
+        }
+        model.addAttribute("to", datesTo);
+        model.addAttribute("from", datesFrom);
+        return "boardingpass";
     }
 }
