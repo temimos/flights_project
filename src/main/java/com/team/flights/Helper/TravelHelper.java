@@ -14,7 +14,7 @@ public class TravelHelper {
 //    6 = E + B
 //    7 = E + F + B
 
-    static long convertToNumber(String name) {
+    public static long convertToNumber(String name) {
         name = name.toLowerCase();
         if (name.startsWith("economy")) {
             return 1;
@@ -27,7 +27,7 @@ public class TravelHelper {
         }
     }
 
-    static String convertToString(long number) {
+    public static String convertToString(long number) {
         if (number == 1) {
             return "Economy";
         } else if (number == 2) {
@@ -39,7 +39,7 @@ public class TravelHelper {
         }
     }
 
-    static boolean isAvailable(long request, long planeType) {
+    public static boolean isAvailable(long request, long planeType) {
         ArrayList<Long> eco = new ArrayList<>();
         eco.add(1L);
         eco.add(4L);
@@ -67,7 +67,7 @@ public class TravelHelper {
         return false;
     }
 
-    static ArrayList<String> getToLocations(ArrayList<Flight> flights) {
+    public static ArrayList<String> getToLocations(ArrayList<Flight> flights) {
         ArrayList<String> locations = new ArrayList<>();
         for (Flight flight : flights) {
             if (!locations.contains(flight.getToLocation())) {
@@ -77,7 +77,7 @@ public class TravelHelper {
         return locations;
     }
 
-    static ArrayList<String> getFromLocations(ArrayList<Flight> flights) {
+    public static ArrayList<String> getFromLocations(ArrayList<Flight> flights) {
         ArrayList<String> locations = new ArrayList<>();
         for (Flight flight : flights) {
             if (!locations.contains(flight.getFromLocation())) {

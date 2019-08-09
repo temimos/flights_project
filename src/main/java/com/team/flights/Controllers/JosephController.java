@@ -5,6 +5,7 @@ import com.team.flights.Beans.Person;
 import com.team.flights.Beans.Trip;
 import com.team.flights.Beans.User;
 import com.team.flights.CustomUserDetails;
+import com.team.flights.Helper.TravelHelper;
 import com.team.flights.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.lang.reflect.Array;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 @Controller
 public class JosephController {
@@ -137,5 +140,35 @@ public class JosephController {
         trip.setUserId(user.getId());
         tripRepository.save(trip);
         return "redirect:/boardingPass";
+    }
+
+    @RequestMapping("/boardingPass")
+    public String boardingPass(Principal principal, Model model) {
+        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
+        model.addAttribute("list", trips);
+        HashMap<Long, String> datesTo = new HashMap<>();
+        HashMap<Long, String> datesFrom = new HashMap<>();
+        for (Trip trip : trips) {
+            long toId = trip.getFlightToId();
+            long fromId = trip.getFlightFromId();
+            if (toId != 0) {
+                datesTo.put(toId, flightRepository.findById(toId).getDate());
+            }
+            if (fromId != 0) {
+                datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
+            }
+        }
+        model.addAttribute("to", datesTo);
+        model.addAttribute("from", datesFrom);
+        return "boardingpass";
+    }
+
+    @RequestMapping("/index")
+    public String listCourses(Model model) {
+        model.addAttribute("flightsto", TravelHelper.getToLocations(flightRepository.findAll()));
+        model.addAttribute("flightsfrom", TravelHelper.getFromLocations(flightRepository.findAll()));
+        model.addAttribute("date", LocalDate.now());
+        return "index";
     }
 }

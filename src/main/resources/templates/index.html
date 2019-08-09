@@ -5,6 +5,17 @@
 
 <head th:replace="base::header">
     <title>List</title>
+    <script>
+        function disable() {
+            document.getElementById("destTo").hidden = true;
+            document.getElementById("toDate").hidden = true;
+        }
+
+        function enable() {
+            document.getElementById("destTo").hidden = false;
+            document.getElementById("toDate").hidden = false;
+        }
+    </script>
 </head>
 
 <body>
@@ -12,104 +23,74 @@
 <div class="container">
     <div class="jumbotron lead text-center">
         <h1>
-           Flight tickets to anywhere in the US and around the world
+            Flight tickets to anywhere in the US and around the world
         </h1>
         <br />
-
-<tr>
-<!--    th:each="flight : ${flights}" th:object="${flight}">-->
-    <form>
+        <form action="#" th:action="@{/search}" method="post">
 
 
-        <!-- Default inline 1-->
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample">
-            <label class="custom-control-label" for="defaultInline1">One Way</label>
-        </div>
+            <!-- Default inline 1-->
+            <div class="custom-control custom-radio custom-control-inline">
+                <input onclick="document.getElementById('toDiv').hidden = true;
+                        document.getElementById('toDateDiv').hidden = true;"
+                        type="radio" class="custom-control-input" id="oneWay" name="type">
+                <label class="custom-control-label" for="oneWay">One Way</label>
+            </div>
 
-        <!-- Default inline 2-->
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
-            <label class="custom-control-label" for="defaultInline2">Round Trip</label>
-        </div>
-        <br/>
-<br/>
-        <td>
-<!--            <div class="col-md-8 mb-3">-->
-                <div class="col-md-8 mb-3 custom-control-inline">
-<!--            <div class="col-auto ">-->
-                <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+            <!-- Default inline 2-->
+            <div class="custom-control custom-radio custom-control-inline">
+                <input onclick="document.getElementById('toDiv').hidden = false;
+                        document.getElementById('toDateDiv').hidden = false;"
+                       checked="checked" type="radio" class="custom-control-input" id="roundTrip" name="type">
+                <label class="custom-control-label" for="roundTrip">Round Trip</label>
+            </div>
+            <br/>
+            <br/>
+
+            <!--            <div class="col-md-8 mb-3">-->
+            <div class="col-md-8 mb-3 custom-control-inline">
+                <!--            <div class="col-auto ">-->
+                <label class="mr-md-4" for="passengers"># of passengers</label>
+                <input type="number" value="1" class="form-control mr-md-4" name="passengers" id="passengers"/>
             </div>
             <br />
 
-        </td>
-        <br />
 
-    <td>
-        <div class="col-md-8 mb-3 custom-control-inline">
-            <!--            <div class="col-auto ">-->
-            <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect2">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-
-        <br />
-        <br />
-
-    </td>
-
-    <td>
             <div class="col-md-8 mb-3 custom-control-inline">
                 <!--            <div class="col-auto ">-->
-                <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                <label class="mr-md-4" for="class">Flight Class</label>
+                <select class="custom-select mr-md-4" name="class" id="class">
                     <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1">Economy</option>
+                    <option value="2">First Class</option>
+                    <option value="3">Business</option>
                 </select>
             </div>
-        <br />
-        <br />
-
-    </td>
-
-    <td>
-            <div class="col-md-8 mb-3 custom-control-inline">
-                <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect4">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-        <br />
-        <br />
-
-    </td>
-
-    <td>
 
             <div class="col-md-8 mb-3 custom-control-inline">
-                <label class="mr-sm-2" for="inlineFormCustomSelect2">Preference</label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect5">
+                <!--            <div class="col-auto ">-->
+                <label class="mr-sm-2" for="destFrom">Departure Location</label>
+                <select class="custom-select mr-sm-2" name="destFrom" id="destFrom">
                     <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option th:each="place : ${flightsto}"
+                            th:value="${place}"
+                            th:text="${place}">
+                    </option>
                 </select>
             </div>
+
+
+            <div id="toDiv" class="col-md-8 mb-3 custom-control-inline">
+                <label class="mr-sm-2" for="destTo">Return Location</label>
+                <select class="custom-select mr-sm-2" name="destTo" id="destTo">
+                    <option selected>Choose...</option>
+                    <option th:each="place : ${flightsfrom}"
+                            th:value="${place}"
+                            th:text="${place}">
+                    </option>
+                </select>
+            </div>
+<<<<<<< HEAD
         <br />
         <br />
 
@@ -126,6 +107,23 @@
 </tr>
 </div>
 
+=======
+>>>>>>> 1b0c71e2f97deb6547717db0b49f6b50993982d8
+
+            <div class="col-md-8 mb-3 custom-control-inline">
+                <label class="mr-sm-2" for="fromDate">Departure Date</label>
+                <input type="date" th:value="${date}" class="form-control mr-sm-2" name="fromDate" id="fromDate"/>
+            </div>
+
+            <div id="toDateDiv" class="col-md-8 mb-3 custom-control-inline">
+                <label class="mr-sm-2" for="toDate">Return Date</label>
+                <input type="date" th:value="${date}" class="form-control mr-sm-2" name="toDate" id="toDate"/>
+            </div>
+            <div>
+            <input type="submit" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
 
 
 
@@ -134,52 +132,47 @@
 
 
 
-<!--<div class="form-group row">-->
-<!--    <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>-->
-<!--    <div class="col-sm-10 text-left">-->
-<!--        <select class="form-control" name = "ToLocation">-->
-<!--&lt;!&ndash;            <span th:text="${user.firstName} +' ' +${user.lastName}"></span><br/>&ndash;&gt;-->
-<!--            <div th:each="flight : ${flights}">-->
-<!--                <option id="projectname" th:text="${flight.ToLocation}"></option>-->
-<!--            </div>-->
-<!--        </select>-->
-<!--        <strong>-->
-<!--                        <span class="error-message"-->
-<!--                              th:errors="*{flight}"-->
-<!--                              th:if="${#fields.hasErrors('flight')}">Project Name Error-->
-<!--                        </span>-->
-<!--        </strong>-->
-<!--    </div>-->
-<!--</div>-->
+
+    <!--<div class="form-group row">-->
+    <!--    <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>-->
+    <!--    <div class="col-sm-10 text-left">-->
+    <!--        <select class="form-control" name = "ToLocation">-->
+    <!--&lt;!&ndash;            <span th:text="${user.firstName} +' ' +${user.lastName}"></span><br/>&ndash;&gt;-->
+    <!--            <div th:each="flight : ${flights}">-->
+    <!--                <option id="projectname" th:text="${flight.ToLocation}"></option>-->
+    <!--            </div>-->
+    <!--        </select>-->
+    <!--        <strong>-->
+    <!--                        <span class="error-message"-->
+    <!--                              th:errors="*{flight}"-->
+    <!--                              th:if="${#fields.hasErrors('flight')}">Project Name Error-->
+    <!--                        </span>-->
+    <!--        </strong>-->
+    <!--    </div>-->
+    <!--</div>-->
 
 
 
-<!--<form action="#" enctype="multipart/form-data" method="post"-->
-<!--      th:action="@{/process}" th:object="${flight}">-->
+    <!--<form action="#" enctype="multipart/form-data" method="post"-->
+    <!--      th:action="@{/process}" th:object="${flight}">-->
 
-<!--    &lt;!&ndash;Hidden properties&ndash;&gt;-->
-<!--    <input th:field="*{id}" type="hidden"/>-->
+    <!--    &lt;!&ndash;Hidden properties&ndash;&gt;-->
+    <!--    <input th:field="*{id}" type="hidden"/>-->
 
-<!--    <input th:field="*{user}" th:value="${user}" type="hidden">-->
+    <!--    <input th:field="*{user}" th:value="${user}" type="hidden">-->
 
-<!--    <div class="text-left">-->
-<!--        <div class="form-group row">-->
-<!--            <label class="col-sm-2 col-form-label" for="title">Title:</label>-->
-<!--            <div class="col-sm-10">-->
-<!--                <input class="form-control" id="title" placeholder="Enter Title"-->
-<!--                       th:field="*{date}" type="text"/>-->
-<!--                <span class="error-message" th:errors="*{date}" th:if="${#fields.hasErrors('date')}"></span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</form>-->
-</body>
-
-</head>
-<body>
-
-
-<div th:replace="base::footer"></div>
-
+    <!--    <div class="text-left">-->
+    <!--        <div class="form-group row">-->
+    <!--            <label class="col-sm-2 col-form-label" for="title">Title:</label>-->
+    <!--            <div class="col-sm-10">-->
+    <!--                <input class="form-control" id="title" placeholder="Enter Title"-->
+    <!--                       th:field="*{date}" type="text"/>-->
+    <!--                <span class="error-message" th:errors="*{date}" th:if="${#fields.hasErrors('date')}"></span>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</form>-->
+</div>
+    <div th:replace="base::footer"></div>
 </body>
 </html>

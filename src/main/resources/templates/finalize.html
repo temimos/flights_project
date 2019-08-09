@@ -11,52 +11,46 @@
         <!------------------------------------------------------------------------------------------------------------------------------------------>
         <div class="container rounded">
             <h1>Please Review Your Trip Order:</h1><br/>
-            <hr>
+            <div th:text="${name}"></div>
+            <div th:text="${creditcardnumber}"></div>
+            <div th:text="${cvv}"></div>
+            <div th:text="${expirationdate}"></div>
+
+            <div class = "row container">
+                <!------------------------------------------------------------------------------------------------------------------------------------------>
+                <div class="card m-2" style="width: 17rem;" th:each="user : ${users}">
+                    <div class="card-header bg-warning text-white">Personal Details</div></br>
+                    <div class="card-body">
+                        <div class="panel-heading">Name: <td th:text = "${user.firstName}"/> <td th:text = "${user.lastName}"/></div></br>
+                        <div class="panel-heading">DOB: <td th:text = "${user.birthDate}"></div></br>
+                        <div class="panel-heading">Email: <td th:text = "${user.email}"></div></br>
+                        <div class="panel-heading">Phone: <td th:text = "${user.phone}"></div></br>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------------------------------------>
+                <div class="card m-2" style="width: 17rem;" th:each="trip : ${trips}">
+                    <div class="card-header bg-warning text-white">Your Flight Details:</div></br>
+                    <div class="card-body">
+                        <div class="panel-heading">Flight Type: <td th:text = "${trip.type}"></div></br>
+                        <div class="panel-heading">Passengers: <td th:text = "${trip.passengers}"></div></br>
+                        <div class="panel-heading">To Location: <td th:text = "${trip.flightToId}"></div></br>
+                        <div class="panel-heading">From Location: <td th:text = "${trip.flightFromId}"></div></br>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------------------------------------>
+                <div class="card m-2" style="width: 17rem;" th:each="trip : ${trips}">
+                    <div class="card-header bg-warning text-white">Payment Details:</div></br>
+                    <div class="card-body">
+                        <div class="panel-heading">Name: <td th:text = "${trip.creditCard.split(', ')[0]}"></div></br>
+                        <div class="panel-heading">Credit Card Number: <td th:text = "${trip.creditCard.split(', ')[1]}"></div></br>
+                        <div class="panel-heading">CVV: <td th:text = "${trip.creditCard.split(', ')[2]}"></div></br>
+                        <div class="panel-heading">Expiration Date: <td th:text = "${trip.creditCard.split(', ')[3]}"></div></br>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------------------------------------>
+            </div>
             <form action="#" th:action="@{/processFinalize}" method="post">
                 <input hidden th:value="${id}" id="id" name="id"/>
-                <h4>Personal Details:</h4>
-                <hr>
-                <div class="card m-2" style="width: 17rem;"  th:each="user : ${users}">
-                    <label>
-                        <div class="panel panel-default card-input">
-                            <div class="card-header bg-info text-white">Name: <td th:text = "${user.firstName}"/> <td th:text = "${user.lastName}"/></div></br>
-                            <div class="card-body">
-                                <div class="panel-heading">DOB: <td th:text = "${user.birthDate}"></div></br>
-                                <div class="panel-heading">Email: <td th:text = "${user.email}"></div></br>
-                                <div class="panel-heading">Phone: <td th:text = "${user.phone}"></div></br>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-                <hr>
-                <h4>Your Flight Details:</h4>
-                <hr>
-                <div class="card m-2" style="width: 17rem;"  th:each="trip : ${trips}">
-                    <label>
-                        <div class="panel panel-default card-input">
-                            <div class="card-header bg-info text-white"></div></br>
-                            <div class="card-body">
-                                <div class="panel-heading">Flight Type: <td th:text = "${trip.type}"></div></br>
-                                <div class="panel-heading">Passengers: <td th:text = "${trip.passengers}"></div></br>
-                                <div class="panel-heading">To Location: <td th:text = "${trip.flightToId}"></div></br>
-                                <div class="panel-heading">From Location: <td th:text = "${trip.flightFromId}"></div></br>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-                <hr>
-                <h4>Payment Details:</h4>
-                <hr>
-                <div class="card m-2" style="width: 17rem;"  th:each="trip : ${trip}">
-                    <label>
-                        <div class="panel panel-default card-input">
-                            <div class="card-header bg-info text-white"></div></br>
-                            <div class="card-body">
-                                <div class="panel-heading">Credit Card: <td th:text = "${trip.creditcard}"></div></br>
-                            </div>
-                        </div>
-                    </label>
-                </div>
                 <p><input class="btn btn-primary" type="submit" value="Submit"/> <a class="btn btn-primary" href="/">Cancel</a></p>
             </form>
         </div>

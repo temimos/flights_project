@@ -13,7 +13,7 @@
 <article class="ticket">
     <header class="ticket__wrapper">
         <div class="ticket__header">
-            2 🎟
+            🎟
         </div>
     </header>
     <div class="ticket__divider">
@@ -24,38 +24,41 @@
         <section class="ticket__section">
             <h3>Your Tickets</h3>
             <p>Name: <td th:text = "${user.firstName}"/> <td th:text = "${user.lastName}"/></br></p>
-            <div th:each="flight : ${flights}">
-            <p>Class: <td th:text = "${flight.flightClass}"/></p>
-            </div>
+            <h3>Class:</h3>
+            <tr th:each="flight : ${flights}">
+                Class:<td th:text = "${flight.flightClass}"/>
+
+               From: <td th:text = "${flight.fromLocation}"/>
+            </tr>
 <!--            fromLocation-->
         </section>
-        <div th:each="flight : ${flights}">
-        <section class="ticket__section">
-            <h3>From</h3>
-            <p>
-            <td th:text = "${flight.fromLocation}"/> </p>
-        </section>
+<!--        <div th:each="flight : ${flights}">-->
+<!--        <section class="ticket__section">-->
+<!--            <h3>From</h3>-->
+<!--            <p>-->
+<!--            -->
+<!--            Netherlands-->
+<!--            </p>-->
+<!--        </section>-->
         </div>
         <div th:each="flight : ${flights}">
             <section class="ticket__section">
                 <h3>To</h3>
                 <p>
-                <td th:text = "${flight.toLocation}"/> </p>
+                <td th:text = "${flight.toLocation}"/>
+                DC
+                </p>
             </section>
         </div>
         <div th:each="flight : ${flights}">
             <section class="ticket__section">
                 <h3>Date</h3>
                 <p>
+                10/22/2019
                <td th:text = "${flight.departingTime}"/> </p>
             </section>
         </div>
-        <div th:each="flight : ${flights}">
-        <section class="ticket__section">
-            <h3>Payment Method</h3>
-            <p>Mastercard **** 8765 </p>
-        </section>
-        </div>
+
     </div>
     <footer class="ticket__footer">
         <span>Total Paid</span>

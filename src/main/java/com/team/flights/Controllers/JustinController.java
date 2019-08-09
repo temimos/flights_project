@@ -1,6 +1,5 @@
 package com.team.flights.Controllers;
 
-import com.team.flights.Beans.Flight;
 import com.team.flights.Beans.Trip;
 import com.team.flights.Beans.User;
 import com.team.flights.CustomUserDetails;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 
@@ -51,22 +49,15 @@ public class JustinController {
                                      @RequestParam(value = "expirationdate",required=false) String expirationdate,
                                      @RequestParam(name = "id",required=false) long id,
                                      Model model, Principal principal){
-        System.out.println(id);
-        Trip trip = tripRepository.findById(id);
-        String data = name+" ,"+creditcardnumber+" ,"+cvv+" ,"+expirationdate;
-        trip.setCreditCard(data);
-        model.addAttribute("id", trip.getId());
-        tripRepository.save(trip);
-        return "/finalize";
-    }
-    //------------------------------------------------------------------------------------------------------------------
-    @RequestMapping("/finalize")
-    public String loadFinalizePage(Principal principal, Model model,@RequestParam(name = "id",required=false) long id) {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
+        String data = name+", "+creditcardnumber+", "+cvv+", "+expirationdate;
         model.addAttribute("trips", trip);
-        model.addAttribute("user",user);
-        model.addAttribute("users", user);
+        trip.setCreditCard(data);
+        model.addAttribute("users",user);
+        model.addAttribute("id", trip.getId());
+        tripRepository.save(trip);
         return "finalize";
     }
+    //------------------------------------------------------------------------------------------------------------------
 }
