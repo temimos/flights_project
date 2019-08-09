@@ -167,7 +167,8 @@ public class JosephController {
     }
 
     @RequestMapping("/search")
-    public String loadFlightPage(@RequestParam(name = "class", required=false) long flightClass,
+    public String loadFlightPage(@RequestParam(name = "type", required=false) long tripType,
+                                 @RequestParam(name = "class", required=false) long flightClass,
                                  @RequestParam(name = "passengers", required=false) long passengers,
                                  @RequestParam(name = "destFrom", required=false) String destFrom,
                                  @RequestParam(name = "destTo", required=false) String destTo,
@@ -200,7 +201,11 @@ public class JosephController {
         model.addAttribute("toDate", toDate);
         model.addAttribute("flights", flights);
         model.addAttribute("tripId",trip.getId());
-        model.addAttribute("on","Departure");
+        if (tripType == 1) {
+            model.addAttribute("on", "Departure");
+        } else {
+            model.addAttribute("on", "One-Way");
+        }
         return "flight";
     }
 
