@@ -53,7 +53,7 @@ public class JustinController {
                                      Model model, Principal principal){
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
-        String data = name+" ,"+creditcardnumber+" ,"+cvv+" ,"+expirationdate;
+        String data = name+", "+creditcardnumber+", "+cvv+", "+expirationdate;
         model.addAttribute("trips", trip);
         trip.setCreditCard(data);
         model.addAttribute("users",user);

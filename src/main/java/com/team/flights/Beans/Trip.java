@@ -3,7 +3,7 @@ package com.team.flights.Beans;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Flight_Data")
+@Table(name="Trip_Data")
 public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
