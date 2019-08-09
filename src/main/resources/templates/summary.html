@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+
+
+</head>
+<body>
+<article class="ticket">
+    <header class="ticket__wrapper">
+        <div class="ticket__header">
+            2 🎟
+        </div>
+    </header>
+    <div class="ticket__divider">
+        <div class="ticket__notch"></div>
+        <div class="ticket__notch ticket__notch--right"></div>
+    </div>
+    <div class="ticket__body">
+        <section class="ticket__section">
+            <h3>Your Tickets</h3>
+<!--            <p>Name: <td th:text = "${user.firstName}"/> <td th:text = "${user.lastName}"/></br></p>-->
+            <p>Block 406   Row Q   Seats 34-35</p>
+            <p>Your seats are together</p>
+        </section>
+        <section class="ticket__section">
+            <h3>Delivery Address</h3>
+            <p>8 Joanne Lane, 2516 AC Den Haag</p>
+            <p>Netherlands</p>
+        </section>
+        <section class="ticket__section">
+            <h3>Payment Method</h3>
+            <p>Mastercard **** 8765</p>
+        </section>
+    </div>
+    <footer class="ticket__footer">
+        <span>Total Paid</span>
+        <span>£173.20</span>
+    </footer>
+    <div class='form-row'>
+        <div class='col-md-12 form-group'>
+            <button class='form-control btn btn-primary submit-button' type='submit'>Pay »</button>
+        </div>
+    </div>
+</article>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -62,6 +62,12 @@ public class TemiController {
         }
         return locations;
     }
+
+    @RequestMapping("/contact")
+    public String contactform( ) {
+
+        return "summary";
+    }
 }
 
 
