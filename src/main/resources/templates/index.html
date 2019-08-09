@@ -31,7 +31,7 @@
 
             <!-- Default inline 1-->
             <div class="custom-control custom-radio custom-control-inline">
-                <input onclick="document.getElementById('toDiv').hidden = true;
+                <input onclick="
                         document.getElementById('toDateDiv').hidden = true;"
                         type="radio" class="custom-control-input" id="oneWay" name="type">
                 <label class="custom-control-label" for="oneWay">One Way</label>
@@ -39,7 +39,7 @@
 
             <!-- Default inline 2-->
             <div class="custom-control custom-radio custom-control-inline">
-                <input onclick="document.getElementById('toDiv').hidden = false;
+                <input onclick="
                         document.getElementById('toDateDiv').hidden = false;"
                        checked="checked" type="radio" class="custom-control-input" id="roundTrip" name="type">
                 <label class="custom-control-label" for="roundTrip">Round Trip</label>
@@ -61,10 +61,11 @@
                 <!--            <div class="col-auto ">-->
                 <label class="mr-md-4" for="class">Flight Class</label>
                 <select class="custom-select mr-md-4" name="class" id="class">
-                    <option selected>Choose...</option>
+                    <option value="7" selected>Choose...</option>
                     <option value="1">Economy</option>
                     <option value="2">First Class</option>
                     <option value="3">Business</option>
+                    <option value="7">Any</option>
                 </select>
             </div>
 
@@ -73,7 +74,7 @@
                 <label class="mr-sm-2" for="destFrom">Departure Location</label>
                 <select class="custom-select mr-sm-2" name="destFrom" id="destFrom">
                     <option selected>Choose...</option>
-                    <option th:each="place : ${flightsto}"
+                    <option th:each="place : ${flightsfrom}"
                             th:value="${place}"
                             th:text="${place}">
                     </option>
@@ -82,34 +83,15 @@
 
 
             <div id="toDiv" class="col-md-8 mb-3 custom-control-inline">
-                <label class="mr-sm-2" for="destTo">Return Location</label>
+                <label class="mr-sm-2" for="destTo">Arrival Location</label>
                 <select class="custom-select mr-sm-2" name="destTo" id="destTo">
                     <option selected>Choose...</option>
-                    <option th:each="place : ${flightsfrom}"
+                    <option th:each="place : ${flightsto}"
                             th:value="${place}"
                             th:text="${place}">
                     </option>
                 </select>
             </div>
-<<<<<<< HEAD
-        <br />
-        <br />
-
-    </td>
-
-<!--        <div class="form-group blu-margin">-->
-<!--            <select class="form-control" th:field="${flight.opeId}"  id="dropOperator">-->
-<!--                <option value="0">select operator</option>-->
-<!--                <option th:each="flight : ${flights}" th:value="${flight.id}" th:text="${flight.toLocation}"></option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--    </form>-->
-    </form>
-</tr>
-</div>
-
-=======
->>>>>>> 1b0c71e2f97deb6547717db0b49f6b50993982d8
 
             <div class="col-md-8 mb-3 custom-control-inline">
                 <label class="mr-sm-2" for="fromDate">Departure Date</label>

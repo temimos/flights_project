@@ -168,6 +168,44 @@ public class JosephController {
         return "boardingpass";
     }
 
+    @RequestMapping("/search")
+    public String loadFlightPage(@RequestParam(name = "class", required=false) long flightClass,
+                                 @RequestParam(name = "passengers", required=false) long passengers,
+                                 @RequestParam(name = "destFrom", required=false) String destFrom,
+                                 @RequestParam(name = "destTo", required=false) String destTo,
+                                 @RequestParam(name = "fromDate", required=false) String fromDate,
+                                 @RequestParam(name = "toDate", required=false) String toDate,
+                                 Model model, Principal principal)
+    {
+
+        Trip trip = new Trip();
+        trip.setPassengers(passengers);
+        trip.setType(flightClass);
+        tripRepository.save(trip);
+
+        fromDate = fromDate.split("-")[1] + "/" + fromDate.split("-")[2] + "/" + fromDate.split("-")[0];
+        toDate = toDate.split("-")[1] + "/" + toDate.split("-")[2] + "/" + toDate.split("-")[0];
+
+        ArrayList<Flight> flights = new ArrayList<>();
+        for (Flight flight : flightRepository.findAll()) {
+            if (flight.getAvailableSeats() >= trip.getPassengers() &&
+                TravelHelper.isAvailable(trip.getType(), flight.getFlightClass()) &&
+                flight.getDate().contains(fromDate) &&
+                flight.getFromLocation().contains(destFrom) &&
+                    flight.getToLocation().contains(destTo)) {
+                    flights.add(flight);
+            }
+        }
+
+        model.addAttribute("destFrom", flights);
+        model.addAttribute("destTo", flights);
+        model.addAttribute("toDate", toDate);
+        model.addAttribute("flights", flights);
+        model.addAttribute("tripId",trip.getId());
+        model.addAttribute("on","departure");
+        return "flight";
+    }
+
     @RequestMapping("/index")
     public String listCourses(Model model) {
         model.addAttribute("flightsto", TravelHelper.getToLocations(flightRepository.findAll()));
