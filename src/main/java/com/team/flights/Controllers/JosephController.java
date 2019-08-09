@@ -66,7 +66,6 @@ public class JosephController {
 
     @RequestMapping("/form")
     public String nameForm(Principal principal, Model model) {
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = new Trip();
         return setNameData(model, trip, tripRepository);
     }
@@ -98,7 +97,6 @@ public class JosephController {
     @PostMapping("/addName")
     public String addName(@RequestParam(name = "id") long id,
                           @RequestParam(name = "person") String name, Principal principal, Model model) {
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Person person = new Person();
         person.setName(name);
         person.setTripId(id);
