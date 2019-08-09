@@ -33,14 +33,29 @@
         <section class="ticket__section">
             <h3>From</h3>
             <p>
-            <td th:text = "${flight.flightfromLocation}"/> </p>
-            <p>Netherlands</p>
+            <td th:text = "${flight.fromLocation}"/> </p>
         </section>
         </div>
+        <div th:each="flight : ${flights}">
+            <section class="ticket__section">
+                <h3>To</h3>
+                <p>
+                <td th:text = "${flight.toLocation}"/> </p>
+            </section>
+        </div>
+        <div th:each="flight : ${flights}">
+            <section class="ticket__section">
+                <h3>Date</h3>
+                <p>
+               <td th:text = "${flight.departingTime}"/> </p>
+            </section>
+        </div>
+        <div th:each="flight : ${flights}">
         <section class="ticket__section">
             <h3>Payment Method</h3>
-            <p>Mastercard **** 8765</p>
+            <p>Mastercard **** 8765 </p>
         </section>
+        </div>
     </div>
     <footer class="ticket__footer">
         <span>Total Paid</span>
