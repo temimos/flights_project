@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -23,15 +23,20 @@
     <div class="ticket__body">
         <section class="ticket__section">
             <h3>Your Tickets</h3>
-<!--            <p>Name: <td th:text = "${user.firstName}"/> <td th:text = "${user.lastName}"/></br></p>-->
-            <p>Block 406   Row Q   Seats 34-35</p>
-            <p>Your seats are together</p>
+            <p>Name: <td th:text = "${user.firstName}"/> <td th:text = "${user.lastName}"/></br></p>
+            <div th:each="flight : ${flights}">
+            <p>Class: <td th:text = "${flight.flightClass}"/></p>
+            </div>
+<!--            fromLocation-->
         </section>
+        <div th:each="flight : ${flights}">
         <section class="ticket__section">
-            <h3>Delivery Address</h3>
-            <p>8 Joanne Lane, 2516 AC Den Haag</p>
+            <h3>From</h3>
+            <p>
+            <td th:text = "${flight.flightfromLocation}"/> </p>
             <p>Netherlands</p>
         </section>
+        </div>
         <section class="ticket__section">
             <h3>Payment Method</h3>
             <p>Mastercard **** 8765</p>
