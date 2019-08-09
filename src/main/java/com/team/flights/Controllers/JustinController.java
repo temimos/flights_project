@@ -1,5 +1,6 @@
 package com.team.flights.Controllers;
 
+import com.team.flights.Beans.Person;
 import com.team.flights.Beans.Trip;
 import com.team.flights.Beans.User;
 import com.team.flights.CustomUserDetails;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.ArrayList;
+
+import static com.team.flights.Controllers.JosephController.setNameData;
 
 @Controller
 public class JustinController {
@@ -66,18 +70,32 @@ public class JustinController {
         Trip trip = new Trip();
         tripRepository.save(trip);
         model.addAttribute("tripId",trip.getId());
+        model.addAttribute("on","departure");
         return "flight";
     }
 
     @PostMapping("/flightprocess")
     public String processFlight(@RequestParam(name = "id",required=false) long id,
-                                @RequestParam(name = "tripId",required=false) long tripId, Model model, Principal principal) {
+                                @RequestParam(name = "tripId",required=false) long tripId,
+                                @RequestParam(name = "on",required=false) String on, Model model, Principal principal) {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(tripId);
-        trip.setFlightFromId(id);
-        tripRepository.save(trip);
-        return "form";
+        if (on.equals("departure")) {
+            trip.setFlightFromId(id);
+            tripRepository.save(trip);
+            model.addAttribute("flights", flightRepository.findAll());
+            model.addAttribute("tripId", trip.getId());
+            model.addAttribute("on", "return");
+            return "flight";
+        } else {
+            trip.setFlightToId(id);
+            tripRepository.save(trip);
+            model.addAttribute("id", trip.getId());
+
+            return setNameData(model, trip, tripRepository);
+        }
     }
+
     //------------------------------------------------------------------------------------------------------------------
 
 }
