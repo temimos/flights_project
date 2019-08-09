@@ -44,11 +44,6 @@ public class JustinController {
     RoleRepository roleRepository;
 
     //------------------------------------------------------------------------------------------------------------------
-    @RequestMapping("/payment")
-    public String loadPaymentPage() {
-        return "creditcard";
-    }
-
     @PostMapping("/processpayment")
     public String processPaymentForm(@RequestParam(value = "name",required=false) String name,
                                      @RequestParam(value = "creditcardnumber",required=false) String creditcardnumber,
@@ -58,6 +53,8 @@ public class JustinController {
                                      Model model, Principal principal){
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
+        model.addAttribute("toLoc",flightRepository.findById(trip.getFlightToId()).getToLocation());
+        model.addAttribute("fromLoc",flightRepository.findById(trip.getFlightFromId()).getFromLocation());
         String data = name+", "+creditcardnumber+", "+cvv+", "+expirationdate;
         model.addAttribute("trips", trip);
         trip.setCreditCard(data);

@@ -19,32 +19,32 @@
             <div class = "row container">
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
                 <div class="card m-2" style="width: 17rem;" th:each="user : ${users}">
-                    <div class="card-header bg-warning text-white">Personal Details</div></br>
+                    <div class="card-header bg-warning text-white">Personal Details</div><br>
                     <div class="card-body">
-                        <div class="panel-heading">Name: <td th:text = "${user.firstName}"/> <td th:text = "${user.lastName}"/></div></br>
-                        <div class="panel-heading">DOB: <td th:text = "${user.birthDate}"></div></br>
-                        <div class="panel-heading">Email: <td th:text = "${user.email}"></div></br>
-                        <div class="panel-heading">Phone: <td th:text = "${user.phone}"></div></br>
+                        <div class="panel-heading">Name: <span th:text = "${user.firstName}"></span> <span th:text = "${user.lastName}"></span></div><br>
+                        <div class="panel-heading">DOB: <span th:text = "${user.birthDate}"></span></div><br>
+                        <div class="panel-heading">Email: <span th:text = "${user.email}"></span></div><br>
+                        <div class="panel-heading">Phone: <span th:text = "${user.phone}"></span></div><br>
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
                 <div class="card m-2" style="width: 17rem;" th:each="trip : ${trips}">
-                    <div class="card-header bg-warning text-white">Your Flight Details:</div></br>
+                    <div class="card-header bg-warning text-white">Your Flight Details:</div><br>
                     <div class="card-body">
-                        <div class="panel-heading">Flight Type: <td th:text = "${trip.type}"></div></br>
-                        <div class="panel-heading">Passengers: <td th:text = "${trip.passengers}"></div></br>
-                        <div class="panel-heading">To Location: <td th:text = "${trip.flightToId}"></div></br>
-                        <div class="panel-heading">From Location: <td th:text = "${trip.flightFromId}"></div></br>
+                        <div class="panel-heading">Flight Type: <span th:text = "${trip.type}"></span></div><br>
+                        <div class="panel-heading">Passengers: <span th:text = "${trip.passengers}"></span></div><br>
+                        <div class="panel-heading">To Location: <span th:text = "${toLoc}"></span></div><br>
+                        <div class="panel-heading">From Location: <span th:text = "${fromLoc}"></span></div><br>
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
                 <div class="card m-2" style="width: 17rem;" th:each="trip : ${trips}">
-                    <div class="card-header bg-warning text-white">Payment Details:</div></br>
+                    <div class="card-header bg-warning text-white">Payment Details:</div><br>
                     <div class="card-body">
-                        <div class="panel-heading">Name: <td th:text = "${trip.creditCard.split(', ')[0]}"></div></br>
-                        <div class="panel-heading">Credit Card Number: <td th:text = "${trip.creditCard.split(', ')[1]}"></div></br>
-                        <div class="panel-heading">CVV: <td th:text = "${trip.creditCard.split(', ')[2]}"></div></br>
-                        <div class="panel-heading">Expiration Date: <td th:text = "${trip.creditCard.split(', ')[3]}"></div></br>
+                        <div class="panel-heading">Name: <span th:text = "${trip.creditCard.split(', ')[0]}"></span></div><br>
+                        <div class="panel-heading">Credit Card Number: <span th:text = "${trip.creditCard.split(', ')[1]}"></span></div><br>
+                        <div class="panel-heading">CVV: <span th:text = "${trip.creditCard.split(', ')[2]}"></span></div><br>
+                        <div class="panel-heading">Expiration Date: <span th:text = "${trip.creditCard.split(', ')[3]}"></span></div><br>
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
