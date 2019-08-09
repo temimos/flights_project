@@ -54,7 +54,7 @@ public class JustinController {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
         model.addAttribute("toLoc",flightRepository.findById(trip.getFlightToId()).getToLocation());
-        model.addAttribute("fromLoc",flightRepository.findById(trip.getFlightFromId()).getFromLocation());
+        model.addAttribute("fromLoc",flightRepository.findById(trip.getFlightToId()).getFromLocation());
         String data = name+", "+creditcardnumber+", "+cvv+", "+expirationdate;
         model.addAttribute("trips", trip);
         trip.setCreditCard(data);
