@@ -11,7 +11,11 @@
         <!------------------------------------------------------------------------------------------------------------------------------------------>
         <div class="container rounded">
             <h1>Please Review Your Trip Order:</h1><br/>
-            <!--            <div th:text="${id}"></div>-->
+            <div th:text="${name}"></div>
+            <div th:text="${creditcardnumber}"></div>
+            <div th:text="${cvv}"></div>
+            <div th:text="${expirationdate}"></div>
+
             <div class = "row container">
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
                 <div class="card m-2" style="width: 17rem;" th:each="user : ${users}">
@@ -37,7 +41,10 @@
                 <div class="card m-2" style="width: 17rem;" th:each="trip : ${trips}">
                     <div class="card-header bg-warning text-white">Payment Details:</div></br>
                     <div class="card-body">
-                        <div class="panel-heading"><td th:text = "${trip.creditCard}"></div></br>
+                        <div class="panel-heading">Name: <td th:text = "${trip.creditCard.split(', ')[0]}"></div></br>
+                        <div class="panel-heading">Credit Card Number: <td th:text = "${trip.creditCard.split(', ')[1]}"></div></br>
+                        <div class="panel-heading">CVV: <td th:text = "${trip.creditCard.split(', ')[2]}"></div></br>
+                        <div class="panel-heading">Expiration Date: <td th:text = "${trip.creditCard.split(', ')[3]}"></div></br>
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
