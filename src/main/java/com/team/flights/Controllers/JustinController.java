@@ -1,7 +1,6 @@
 package com.team.flights.Controllers;
 
 import com.team.flights.Beans.Flight;
-import com.team.flights.Beans.Person;
 import com.team.flights.Beans.Trip;
 import com.team.flights.Beans.User;
 import com.team.flights.CustomUserDetails;
@@ -82,7 +81,6 @@ public class JustinController {
                                 @RequestParam(name = "id",required=false) long id,
                                 @RequestParam(name = "tripId",required=false) long tripId,
                                 @RequestParam(name = "on",required=false) String on, Model model, Principal principal) {
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(tripId);
 
         if (on.equals("Departure")) {
