@@ -54,6 +54,17 @@ public class FlightLoader implements CommandLineRunner {
         flightRepository.save(flight);
 
         flight = new Flight();
+        flight.setFromLocation("Los Angeles");
+        flight.setToLocation("Washington DC");
+        flight.setDate("08/12/2019");
+        flight.setDepartingTime("9:00AM");
+        flight.setArrivalTime("3:00PM");
+        flight.setAvailableSeats(5);
+        flight.setFlightClass(7);
+        flight.setPrice(300);
+        flightRepository.save(flight);
+
+        flight = new Flight();
         flight.setToLocation("Toronto");
         flight.setFromLocation("Austin");
         flight.setDate("08/21/2019");

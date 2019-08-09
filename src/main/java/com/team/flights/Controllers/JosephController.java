@@ -197,12 +197,12 @@ public class JosephController {
             }
         }
 
-        model.addAttribute("destFrom", flights);
-        model.addAttribute("destTo", flights);
+        model.addAttribute("destFrom", destFrom);
+        model.addAttribute("destTo", destTo);
         model.addAttribute("toDate", toDate);
         model.addAttribute("flights", flights);
         model.addAttribute("tripId",trip.getId());
-        model.addAttribute("on","departure");
+        model.addAttribute("on","Departure");
         return "flight";
     }
 

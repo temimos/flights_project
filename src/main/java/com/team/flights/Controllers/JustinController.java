@@ -5,6 +5,7 @@ import com.team.flights.Beans.Person;
 import com.team.flights.Beans.Trip;
 import com.team.flights.Beans.User;
 import com.team.flights.CustomUserDetails;
+import com.team.flights.Helper.TravelHelper;
 import com.team.flights.Repositories.*;
 import com.team.flights.SSUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,17 +76,33 @@ public class JustinController {
     }
 
     @PostMapping("/flightprocess")
-    public String processFlight(@RequestParam(name = "id",required=false) long id,
+    public String processFlight(@RequestParam(name = "destFrom", required=false) String destFrom,
+                                @RequestParam(name = "destTo", required=false) String destTo,
+                                @RequestParam(name = "toDate", required=false) String toDate,
+                                @RequestParam(name = "id",required=false) long id,
                                 @RequestParam(name = "tripId",required=false) long tripId,
                                 @RequestParam(name = "on",required=false) String on, Model model, Principal principal) {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(tripId);
-        if (on.equals("departure")) {
+
+        if (on.equals("Departure")) {
             trip.setFlightFromId(id);
             tripRepository.save(trip);
-            model.addAttribute("flights", flightRepository.findAll());
+
+            ArrayList<Flight> flights = new ArrayList<>();
+            for (Flight flight : flightRepository.findAll()) {
+                if (flight.getAvailableSeats() >= trip.getPassengers() &&
+                        TravelHelper.isAvailable(trip.getType(), flight.getFlightClass()) &&
+                        flight.getDate().contains(toDate) &&
+                        flight.getFromLocation().contains(destTo) &&
+                        flight.getToLocation().contains(destFrom)) {
+                    flights.add(flight);
+                }
+            }
+
+            model.addAttribute("flights", flights);
             model.addAttribute("tripId", trip.getId());
-            model.addAttribute("on", "return");
+            model.addAttribute("on", "Return");
             return "flight";
         } else {
             trip.setFlightToId(id);
