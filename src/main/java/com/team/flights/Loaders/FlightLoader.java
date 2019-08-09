@@ -39,6 +39,7 @@ public class FlightLoader implements CommandLineRunner {
         flight.setArrivalTime("6:00PM");
         flight.setAvailableSeats(10);
         flight.setFlightClass(2);
+        flight.setPrice(298);
         flightRepository.save(flight);
 
         flight = new Flight();
@@ -49,6 +50,7 @@ public class FlightLoader implements CommandLineRunner {
         flight.setArrivalTime("3:00PM");
         flight.setAvailableSeats(5);
         flight.setFlightClass(7);
+        flight.setPrice(300);
         flightRepository.save(flight);
 
         flight = new Flight();
@@ -59,6 +61,40 @@ public class FlightLoader implements CommandLineRunner {
         flight.setArrivalTime("7:00PM");
         flight.setAvailableSeats(1);
         flight.setFlightClass(7);
+        flight.setPrice(500);
+        flightRepository.save(flight);
+
+        flight = new Flight();
+        flight.setToLocation("Japan");
+        flight.setFromLocation("San Diego");
+        flight.setDate("8/1/2019");
+        flight.setDepartingTime("1:00PM");
+        flight.setArrivalTime("7:00PM");
+        flight.setAvailableSeats(3);
+        flight.setFlightClass(1);
+        flight.setPrice(489);
+        flightRepository.save(flight);
+
+        flight = new Flight();
+        flight.setToLocation("Italy");
+        flight.setFromLocation("Spain");
+        flight.setDate("8/12/2019");
+        flight.setDepartingTime("4:00PM");
+        flight.setArrivalTime("5:00PM");
+        flight.setAvailableSeats(2);
+        flight.setFlightClass(1);
+        flight.setPrice(375);
+        flightRepository.save(flight);
+
+        flight = new Flight();
+        flight.setToLocation("Turkey");
+        flight.setFromLocation("Sydney");
+        flight.setDate("8/15/2019");
+        flight.setDepartingTime("7:00AM");
+        flight.setArrivalTime("9:00PM");
+        flight.setAvailableSeats(30);
+        flight.setFlightClass(3);
+        flight.setPrice(700);
         flightRepository.save(flight);
     }
 }
