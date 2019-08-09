@@ -1,5 +1,6 @@
 package com.team.flights.Controllers;
 
+import com.team.flights.Beans.Flight;
 import com.team.flights.Beans.Person;
 import com.team.flights.Beans.Trip;
 import com.team.flights.Beans.User;
@@ -10,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -95,7 +98,21 @@ public class JustinController {
             return setNameData(model, trip, tripRepository);
         }
     }
-
     //------------------------------------------------------------------------------------------------------------------
+    @RequestMapping("/admin")
+    public String adminPage(Model model) {
+        model.addAttribute("flight",new Flight());
+        return "admin";
+    }
 
+    @PostMapping("/adminprocess")
+    public String adminProcessPage(@Valid Flight flight, BindingResult result) {
+        if(result.hasErrors())
+        {
+            return "admin";
+        }
+        flightRepository.save(flight);
+        return "redirect:/";
+    }
+    //------------------------------------------------------------------------------------------------------------------
 }

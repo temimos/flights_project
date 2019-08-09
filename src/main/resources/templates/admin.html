@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="base::header">
+<body class="page">
+<div th:replace="base::nav"></div>
+
+<div class = "main">
+    <div class = "container">
+        <h1>Add a Fliht</h1><br/>
+        <div class="container rounded">
+            <form action="#"
+                  th:action = "@{/adminprocess}"
+                  th:object = "${flight}"
+                  method="post">
+                <div class="form-group col-md9">
+                    <input type = "hidden" class="form-control" th:field="*{id}" />
+                    Destination:<br />
+                    <input type = "text" class="form-control" th:field = "*{toLocation}" />
+                    <span th:if = "${#fields.hasErrors('toLocation')}"
+                          th:errors = "*{toLocation}"></span><br />
+                    Departure:<br />
+                    <input type = "text" class="form-control" th:field = "*{fromLocation}" />
+                    <span th:if = "${#fields.hasErrors('fromLocation')}"
+                          th:errors = "*{fromLocation}"></span><br />
+                    Date:<br />
+                    <input type = "text" class="form-control" th:field = "*{date}" />
+                    <span th:if = "${#fields.hasErrors('date')}"
+                          th:errors = "*{date}"></span><br />
+                    Departing Time:<br />
+                    <input type = "text" class="form-control" th:field = "*{departingTime}" />
+                    <span th:if = "${#fields.hasErrors('departingTime')}"
+                          th:errors = "*{departingTime}"></span><br />
+                    Arrival Time:<br />
+                    <input type = "text" class="form-control" th:field = "*{arrivalTime}" />
+                    <span th:if = "${#fields.hasErrors('arrivalTime')}"
+                          th:errors = "*{arrivalTime}"></span><br />
+                    Avaliable Seats:<br />
+                    <input type = "text" class="form-control" th:field = "*{availableSeats}" />
+                    <span th:if = "${#fields.hasErrors('availableSeats')}"
+                          th:errors = "*{availableSeats}"></span><br />
+                    Flight Class:<br />
+                    <input type = "text" class="form-control" th:field = "*{flightClass}" />
+                    <span th:if = "${#fields.hasErrors('flightClass')}"
+                          th:errors = "*{flightClass}"></span><br />
+                    Price:<br />
+                    <input type = "text" class="form-control" th:field = "*{price}" />
+                    <span th:if = "${#fields.hasErrors('price')}"
+                          th:errors = "*{price}"></span><br />
+                    <input class="btn btn-primary" type = "submit" value = "Submit" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="base :: footer"></div>
+</body>
+</html>
