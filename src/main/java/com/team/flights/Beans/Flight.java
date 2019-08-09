@@ -30,6 +30,9 @@ public class Flight {
     @Column(name = "available_seats")
     private long availableSeats;
 
+    @Column(name = "price")
+    private long price;
+
     @Column(name = "user_id")
     private long userId;
 
@@ -108,6 +111,14 @@ public class Flight {
         this.tripId = tripId;
     }
 
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
     public long getAvailableSeats() {
         return availableSeats;
     }
@@ -128,7 +139,7 @@ public class Flight {
         this.userId = userId;
         this.tripId = tripId;
     }
-
     public Flight() {
     }
+
 }

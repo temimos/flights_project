@@ -60,4 +60,24 @@ public class JustinController {
         return "finalize";
     }
     //------------------------------------------------------------------------------------------------------------------
+    @RequestMapping("/flight")
+    public String loadFlightPage(Model model) {
+        model.addAttribute("flights",flightRepository.findAll());
+        Trip trip = new Trip();
+        tripRepository.save(trip);
+        model.addAttribute("tripId",trip.getId());
+        return "flight";
+    }
+
+    @PostMapping("/flightprocess")
+    public String processFlight(@RequestParam(name = "id",required=false) long id,
+                                @RequestParam(name = "tripId",required=false) long tripId, Model model, Principal principal) {
+        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        Trip trip = tripRepository.findById(tripId);
+        trip.setFlightFromId(id);
+        tripRepository.save(trip);
+        return "form";
+    }
+    //------------------------------------------------------------------------------------------------------------------
+
 }
