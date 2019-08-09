@@ -34,7 +34,7 @@ public class FlightLoader implements CommandLineRunner {
         Flight flight = new Flight();
         flight.setToLocation("Hong Kong");
         flight.setFromLocation("New York");
-        flight.setDate("8/8/2019");
+        flight.setDate("08/08/2019");
         flight.setDepartingTime("5:00AM");
         flight.setArrivalTime("6:00PM");
         flight.setAvailableSeats(10);
@@ -45,7 +45,7 @@ public class FlightLoader implements CommandLineRunner {
         flight = new Flight();
         flight.setToLocation("Los Angeles");
         flight.setFromLocation("Washington DC");
-        flight.setDate("8/10/2019");
+        flight.setDate("08/10/2019");
         flight.setDepartingTime("9:00AM");
         flight.setArrivalTime("3:00PM");
         flight.setAvailableSeats(5);
@@ -56,7 +56,7 @@ public class FlightLoader implements CommandLineRunner {
         flight = new Flight();
         flight.setToLocation("Toronto");
         flight.setFromLocation("Austin");
-        flight.setDate("8/21/2019");
+        flight.setDate("08/21/2019");
         flight.setDepartingTime("4:00PM");
         flight.setArrivalTime("7:00PM");
         flight.setAvailableSeats(1);
@@ -67,7 +67,7 @@ public class FlightLoader implements CommandLineRunner {
         flight = new Flight();
         flight.setToLocation("Japan");
         flight.setFromLocation("San Diego");
-        flight.setDate("8/1/2019");
+        flight.setDate("08/01/2019");
         flight.setDepartingTime("1:00PM");
         flight.setArrivalTime("7:00PM");
         flight.setAvailableSeats(3);
@@ -78,7 +78,7 @@ public class FlightLoader implements CommandLineRunner {
         flight = new Flight();
         flight.setToLocation("Italy");
         flight.setFromLocation("Spain");
-        flight.setDate("8/12/2019");
+        flight.setDate("08/12/2019");
         flight.setDepartingTime("4:00PM");
         flight.setArrivalTime("5:00PM");
         flight.setAvailableSeats(2);
@@ -89,7 +89,7 @@ public class FlightLoader implements CommandLineRunner {
         flight = new Flight();
         flight.setToLocation("Turkey");
         flight.setFromLocation("Sydney");
-        flight.setDate("8/15/2019");
+        flight.setDate("08/15/2019");
         flight.setDepartingTime("7:00AM");
         flight.setArrivalTime("9:00PM");
         flight.setAvailableSeats(30);
