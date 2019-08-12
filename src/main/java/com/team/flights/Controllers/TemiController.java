@@ -43,7 +43,7 @@ public class TemiController {
     @Autowired
     RoleRepository roleRepository;
 
-//    @RequestMapping("/")
+    //    @RequestMapping("/")
 //    public String listCourses(Model model) {
 //        model.addAttribute("flightsto",getToLocations() );
 //        return "index";
@@ -69,19 +69,30 @@ public class TemiController {
     }
 
     @RequestMapping("/summary")
-    public String contactform(  Model model, Principal principal) {
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
-        model.addAttribute("user",((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser());
+    public String contactform(Model model, Principal principal) {
+        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        model.addAttribute("user", ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser());
 
         Iterable<Flight> flights = new ArrayList<>();
         ArrayList<Flight> flightsForReal = new ArrayList<>();
-        flights=flightRepository.findAll();
-        for (Flight flight : flights){
-            if(user.getId() == flight.getUserId()){
+        flights = flightRepository.findAll();
+        for (Flight flight : flights) {
+            if (user.getId() == flight.getUserId()) {
                 flightsForReal.add(flight);
             }
         }
-        model.addAttribute("flights",flightsForReal);
+        model.addAttribute("flights", flightsForReal);
+
+        ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
+        model.addAttribute("list", trips);
+        HashMap<Long, String> datesTo = new HashMap<>();
+        HashMap<Long, String> datesFrom = new HashMap<>();
+        for (Trip trip : trips) {
+            long toId = trip.getFlightToId();
+            long fromId = trip.getFlightFromId();
+        }
+        model.addAttribute("to", datesTo);
+        model.addAttribute("from", datesFrom);
         return "summary";
     }
 
@@ -109,7 +120,7 @@ public class TemiController {
 
     @RequestMapping("/boardingPass")
     public String boardingPass(Principal principal, Model model) {
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
         model.addAttribute("list", trips);
         HashMap<Long, String> datesTo = new HashMap<>();
@@ -124,11 +135,58 @@ public class TemiController {
                 datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
             }
         }
+//        Flight flight = flightRepository.findAllByToLocation(to()).get();
         model.addAttribute("to", datesTo);
         model.addAttribute("from", datesFrom);
+
+
+        Iterable<Flight> flights = new ArrayList<>();
+        ArrayList<Flight> flightsForReal = new ArrayList<>();
+        flights = flightRepository.findAll();
+        for (Flight flight : flights) {
+            if (user.getId() == flight.getUserId()) {
+                flightsForReal.add(flight);
+            }
+
+            HashMap <String, String> map=getHashMap();
+            String airport = map.get(flight.getToLocation()) ;
+        }
+        model.addAttribute("flights", flightsForReal);
+        mode
+
         return "prettypass";
     }
+
+    public static HashMap<String, String> getHashMap() {
+
+        HashMap<String, String> map = new HashMap<String, String>();
+
+        map.put("Washington DC", "DCA");
+        map.put("Baltimore", "BWI");
+        map.put("New York", "JFK");
+        System.out.println("map = " + map);
+        return map;
+
+    }
+
 }
+//
+//String tolocation= "Baltimore";
+//String fLocation= "DC";
+//
+//        if (flightRepository.findAllByToLocationAndFromLocation(tolocation, fLocation))=
+//        {
+//            model.addAttribute("message",
+//                    "BWI");
+//        }else{
+//
+//            model.addAttribute("message",
+//                                "THP");
+//        }
+//
+//        return "prettypass";
+
+
 
 
 

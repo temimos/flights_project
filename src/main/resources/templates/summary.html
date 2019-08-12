@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" type="text/css" href="/style.css">
+<!--    <link rel="stylesheet" type="text/css" href="/style.css">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
 
 
@@ -25,41 +25,81 @@
             <h3>Your Tickets</h3>
             <p>Name: <td th:text = "${user.firstName}"/> <td th:text = "${user.lastName}"/></br></p>
             <h3>Class:</h3>
-            <tr th:each="flight : ${flights}">
-                Class:<td th:text = "${flight.flightClass}"/>
-
-               From: <td th:text = "${flight.fromLocation}"/>
-            </tr>
-<!--            fromLocation-->
+            <div class="container">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Payment</th>
+                        <th>Type</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="trip : ${list}">
+                        <td th:text="'Ticket #' + ${trip.id}"></td>
+                        <td th:if="${trip.creditCard.split(', ')[1].length()} >= 16"
+                            th:text="${trip.creditCard.split(', ')[0]} + ' | Ending in ****' +
+                    ${trip.creditCard.split(', ')[1].substring(12)}"></td>
+                        <td th:if="${trip.creditCard.split(', ')[1].length()} < 16"
+                            th:text="'Unknown Credit Card'"></td>
+                        <td th:if="${trip.flightToId} != 0" th:text="'Roundtrip'">
+                            <p th:text="${from.get(trip.id)}"></p>
+                            <p th:text="${to.get(trip.id)}"></p>
+                        </td>
+                        <td th:if="${trip.flightToId} == 0" th:text="'One-way Flight'">
+                            <p th:text="${from.get(trip.id)}"></p>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" th:href="@{/viewTicket/{id}(id=${trip.id})}">
+                                View Details
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
-<!--        <div th:each="flight : ${flights}">-->
-<!--        <section class="ticket__section">-->
-<!--            <h3>From</h3>-->
-<!--            <p>-->
-<!--            -->
-<!--            Netherlands-->
-<!--            </p>-->
-<!--        </section>-->
-        </div>
-        <div th:each="flight : ${flights}">
-            <section class="ticket__section">
-                <h3>To</h3>
-                <p>
-                <td th:text = "${flight.toLocation}"/>
-                DC
-                </p>
-            </section>
-        </div>
-        <div th:each="flight : ${flights}">
-            <section class="ticket__section">
-                <h3>Date</h3>
-                <p>
-                10/22/2019
-               <td th:text = "${flight.departingTime}"/> </p>
-            </section>
-        </div>
-
     </div>
+</article>
+</body>
+</html>
+<!--            <tr th:each="flight : ${flights}">-->
+
+<!--                Class:<td th:text = "${flight.flightClass}"/>-->
+
+<!--               From: <td th:text = "${flight.fromLocation}"/>-->
+<!--            </tr>-->
+<!--&lt;!&ndash;            fromLocation&ndash;&gt;-->
+<!--        </section>-->
+<!--&lt;!&ndash;        <div th:each="flight : ${flights}">&ndash;&gt;-->
+<!--&lt;!&ndash;        <section class="ticket__section">&ndash;&gt;-->
+<!--&lt;!&ndash;            <h3>From</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p>&ndash;&gt;-->
+<!--&lt;!&ndash;            &ndash;&gt;-->
+<!--&lt;!&ndash;            Netherlands&ndash;&gt;-->
+<!--&lt;!&ndash;            </p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </section>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div th:each="flight : ${flights}">-->
+<!--            <section class="ticket__section">-->
+<!--                <h3>To</h3>-->
+<!--                <p>-->
+<!--                <td th:text = "${flight.toLocation}"/>-->
+<!--                DC-->
+<!--                </p>-->
+<!--            </section>-->
+<!--        </div>-->
+<!--        <div th:each="flight : ${flights}">-->
+<!--            <section class="ticket__section">-->
+<!--                <h3>Date</h3>-->
+<!--                <p>-->
+<!--                10/22/2019-->
+<!--               <td th:text = "${flight.departingTime}"/> </p>-->
+<!--            </section>-->
+<!--        </div>-->
+
+<!--    </div>-->
     <footer class="ticket__footer">
         <span>Total Paid</span>
         <span>£173.20</span>
