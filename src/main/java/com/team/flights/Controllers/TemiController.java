@@ -93,11 +93,13 @@ public class TemiController {
         return "summary";
     }
 
-    @RequestMapping("/boardingPass")
+    @PostMapping("/boardingPass")
     public String prettyPass(Principal principal, Model model) {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
         model.addAttribute("list", trips);
+
+
         HashMap<Long, String> datesTo = new HashMap<>();
         HashMap<Long, String> datesFrom = new HashMap<>();
         for (Trip trip : trips) {
@@ -109,9 +111,16 @@ public class TemiController {
             if (fromId != 0) {
                 datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
             }
+//            Trip triped = tripRepository.findById(toId);
+//            model.addAttribute("toLoc", flightRepository.findById(triped.getFlightToId()).getToLocation());
+
+
         }
         model.addAttribute("to", datesTo);
         model.addAttribute("from", datesFrom);
+
+
+
         return "prettypass";
     }
 //

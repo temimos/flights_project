@@ -16,28 +16,28 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Min(value = 2)
+    //@Min(value = 2)
     private String firstName;
 
-    @Min(value = 2)
+    //@Min(value = 2)
     private String lastName;
 
-    @Pattern(regexp = "\\d+\\/\\d+\\/\\d\\d+")
+    //@Pattern(regexp = "\\d+\\/\\d+\\/\\d\\d+")
     private String birthDate;
 
-    @Min(value = 2)
+    //@Min(value = 2)
     private String country;
 
-    @Pattern(regexp = "\\S+@\\S+[.]\\S+")
+    //@Pattern(regexp = "\\S+@\\S+[.]\\S+")
     private String email;
 
-    @Pattern(regexp = "(\\d-)*\\d{3}-\\d{3}-\\d{4}")
+    //@Pattern(regexp = "(\\d-)*\\d{3}-\\d{3}-\\d{4}")
     private String phone;
 
-    @Min(value = 2)
+    //@Min(value = 2)
     private String username;
 
-    @Min(value = 5)
+    // @Min(value = 5)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
