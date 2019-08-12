@@ -209,7 +209,7 @@ public class JosephController {
         return "flight";
     }
 
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public String listCourses(Model model) {
         model.addAttribute("flightsto", TravelHelper.getToLocations(flightRepository.findAll()));
         model.addAttribute("flightsfrom", TravelHelper.getFromLocations(flightRepository.findAll()));
