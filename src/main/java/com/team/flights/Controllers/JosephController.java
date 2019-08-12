@@ -162,13 +162,13 @@ public class JosephController {
         return "boardingpass";
     }
 
-    @RequestMapping("/viewTicket/{id}")
-    public String viewTicket(@PathVariable("id") long id, Principal principal, Model model) {
-        Trip trip = tripRepository.findById(id);
-        Flight flightTo = flightRepository.findById(trip.getFlightToId());
-        Flight flightFrom = flightRepository.findById(trip.getFlightFromId());
-        return "prettypass";
-    }
+//    @RequestMapping("/viewTicket/{id}")
+//    public String viewTicket(@PathVariable("id") long id, Principal principal, Model model) {
+//        Trip trip = tripRepository.findById(id);
+//        Flight flightTo = flightRepository.findById(trip.getFlightToId());
+//        Flight flightFrom = flightRepository.findById(trip.getFlightFromId());
+//        return "prettypass";
+//    }
 
     @RequestMapping("/search")
     public String loadFlightPage(@RequestParam(name = "type", required = false) long tripType,
