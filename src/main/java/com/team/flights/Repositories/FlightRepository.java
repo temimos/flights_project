@@ -7,13 +7,12 @@ import java.util.ArrayList;
 
 public interface FlightRepository extends CrudRepository<Flight,Long> {
 
-    long countByState(String state);
-//    Iterable<Flight> findAllByToLocation(String tolocation);
-//    Iterable<Flight> findAllByFromLocation(String fLocation);
+    Iterable<Flight> findAllByToLocation(String tolocation);
+    Iterable<Flight> findAllByFromLocation(String fLocation);
 
     ArrayList<Flight> findAll();
-    ArrayList<Flight> findAllByToLocation(String tolocation);
-    ArrayList<Flight> findAllByFromLocation(String fLocation);
+//    ArrayList<Flight> findAllByToLocation(String tolocation);
+//    ArrayList<Flight> findAllByFromLocation(String fLocation);
     Flight findById(long id);
     Flight findByUserId(long id);
     Flight findByTripId(long id);
