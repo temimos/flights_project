@@ -3,6 +3,7 @@ package com.team.flights.Helper;
 import com.team.flights.Beans.Flight;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TravelHelper {
 
@@ -68,22 +69,28 @@ public class TravelHelper {
     }
 
     public static ArrayList<String> getToLocations(ArrayList<Flight> flights) {
-        ArrayList<String> locations = new ArrayList<>();
-        for (Flight flight : flights) {
-            if (!locations.contains(flight.getToLocation())) {
-                locations.add(flight.getToLocation());
-            }
-        }
-        return locations;
+//        ArrayList<String> locations = new ArrayList<>();
+//        for (Flight flight : flights) {
+//            if (!locations.contains(flight.getToLocation())) {
+//                locations.add(flight.getToLocation());
+//            }
+//        }
+        return new ArrayList<>(Arrays.asList("Washington DC", "Los Angeles", "New York", "Detroit", "Portland",
+                "Salt Lake City", "Paris", "Warsaw", "Lisbon", "Madrid", "London", "Rome", "Athens", "Berlin", "Stockholm",
+                "Tokyo", "Bern", "Moscow", "Amsterdam", "Hong Kong", "Seoul", "New Delhi", "Beijing", "Sydney",
+                "Wellington", "Boston"));
     }
 
     public static ArrayList<String> getFromLocations(ArrayList<Flight> flights) {
-        ArrayList<String> locations = new ArrayList<>();
-        for (Flight flight : flights) {
-            if (!locations.contains(flight.getFromLocation())) {
-                locations.add(flight.getFromLocation());
-            }
-        }
-        return locations;
+//        ArrayList<String> locations = new ArrayList<>();
+//        for (Flight flight : flights) {
+//            if (!locations.contains(flight.getFromLocation())) {
+//                locations.add(flight.getFromLocation());
+//            }
+//        }
+        return new ArrayList<>(Arrays.asList("Washington DC", "Los Angeles", "New York", "Detroit", "Portland",
+                "Salt Lake City", "Paris", "Warsaw", "Lisbon", "Madrid", "London", "Rome", "Athens", "Berlin", "Stockholm",
+                "Tokyo", "Bern", "Moscow", "Amsterdam", "Hong Kong", "Seoul", "New Delhi", "Beijing", "Sydney",
+                "Wellington", "Boston"));
     }
 }

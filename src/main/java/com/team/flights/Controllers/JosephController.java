@@ -71,10 +71,6 @@ public class JosephController {
     }
 
     static String setNameData(Model model, Trip trip, TripRepository tripRepository) {
-        trip.setPassengers(2);
-        trip.setType(1L);
-
-        tripRepository.save(trip);
 
         ArrayList<Person> persons = new ArrayList<>();
 
@@ -182,8 +178,8 @@ public class JosephController {
         trip.setType(flightClass);
         tripRepository.save(trip);
 
-        fromDate = fromDate.split("-")[1] + "/" + fromDate.split("-")[2] + "/" + fromDate.split("-")[0];
-        toDate = toDate.split("-")[1] + "/" + toDate.split("-")[2] + "/" + toDate.split("-")[0];
+//        fromDate = fromDate.split("-")[1] + "/" + fromDate.split("-")[2] + "/" + fromDate.split("-")[0];
+//        toDate = toDate.split("-")[1] + "/" + toDate.split("-")[2] + "/" + toDate.split("-")[0];
 
         ArrayList<Flight> flights = new ArrayList<>();
         for (Flight flight : flightRepository.findAll()) {
