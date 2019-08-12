@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -16,16 +17,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Min(value = 2)
+    @Size(min = 2, max = 50)
     private String firstName;
 
-    @Min(value = 2)
+    @Size(min = 2, max = 50)
     private String lastName;
 
     @Pattern(regexp = "\\d+\\/\\d+\\/\\d\\d+")
     private String birthDate;
 
-    @Min(value = 2)
+    @Size(min = 2, max = 50)
     private String country;
 
     @Pattern(regexp = "\\S+@\\S+[.]\\S+")
@@ -34,10 +35,10 @@ public class User {
     @Pattern(regexp = "(\\d-)*\\d{3}-\\d{3}-\\d{4}")
     private String phone;
 
-    @Min(value = 2)
+    @Size(min = 2, max = 50)
     private String username;
 
-    @Min(value = 5)
+    @Size(min = 5, max = 500)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -128,8 +129,12 @@ public class User {
     }
 
     public void setPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(password);
+        if (password.length() >= 5 && password.length() <= 50) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            this.password = passwordEncoder.encode(password);
+        } else {
+            this.password = "";
+        }
     }
 
     public Collection<Role> getRoles() {

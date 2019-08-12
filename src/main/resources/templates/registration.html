@@ -13,35 +13,35 @@
     <h4>New User Registration</h4>
     <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
         <label>First Name</label>
-        <strong><span th:if="${#fields.hasErrors('firstName')}">First Name Error</span></strong>
+        <strong><span style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span></strong>
         <input class="form-control" type="text" id="firstName" placeholder="First Name" th:field="*{firstName}" /><br />
 
         <label>Last Name</label>
-        <strong><span th:if="${#fields.hasErrors('lastName')}">Last Name Error</span></strong>
+        <strong><span style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span></strong>
         <input class="form-control" type="text" id="lastName" placeholder="Last Name" th:field="*{lastName}" /><br />
 
         <label>Date of Birth</label>
-        <strong><span th:if="${#fields.hasErrors('birthDate')}">Date Error</span></strong>
+        <strong><span style="color: red" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Date Error</span></strong>
         <input class="form-control" type="text" id="birthDate" placeholder="mm/dd/yyyy" th:field="*{birthDate}" /><br />
 
         <label>Country</label>
-        <strong><span th:if="${#fields.hasErrors('country')}">Country Error</span></strong>
+        <strong><span style="color: red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">Country Error</span></strong>
         <input class="form-control" type="text" id="country" placeholder="Country" th:field="*{country}" /><br />
 
         <label>E-mail</label>
-        <strong><span th:if="${#fields.hasErrors('email')}">E-mail Error</span></strong>
+        <strong><span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">E-mail Error</span></strong>
         <input class="form-control" type="text" id="email" placeholder="example@place.com" th:field="*{email}" /><br />
 
         <label>Phone Number</label>
-        <strong><span th:if="${#fields.hasErrors('phone')}">Phone Number Error</span></strong>
+        <strong><span style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Number Error</span></strong>
         <input class="form-control" type="text" id="phone" placeholder="###-###-####" th:field="*{phone}" /><br />
 
         <label>Username</label>
-        <strong><span th:if="${#fields.hasErrors('username')}">Username Error</span></strong>
+        <strong><span style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span></strong>
         <input class="form-control" type="text" id="username" placeholder="Username" th:field="*{username}" /><br />
 
         <label>Password</label>
-        <strong><span th:if="${#fields.hasErrors('password')}">Password Error</span></strong>
+        <strong><span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span></strong>
         <input class="form-control" type="password" id="password" placeholder="Password" th:field="*{password}" /><br />
 
         <button type="submit" class="btn btn-primary btn-lg" >Finish</button>
