@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 
 @Controller
@@ -42,11 +43,11 @@ public class TemiController {
     @Autowired
     RoleRepository roleRepository;
 
-    @RequestMapping("/")
-    public String listCourses(Model model) {
-        model.addAttribute("flightsto",getToLocations() );
-        return "index";
-    }
+//    @RequestMapping("/")
+//    public String listCourses(Model model) {
+//        model.addAttribute("flightsto",getToLocations() );
+//        return "index";
+//    }
     ArrayList<String> getToLocations() {
         ArrayList<String> locations = new ArrayList<>();
         for (Flight flight : flightRepository.findAll()) {
@@ -67,7 +68,7 @@ public class TemiController {
         return locations;
     }
 
-    @RequestMapping("/contact")
+    @RequestMapping("/summary")
     public String contactform(  Model model, Principal principal) {
         User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         model.addAttribute("user",((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser());
@@ -82,6 +83,50 @@ public class TemiController {
         }
         model.addAttribute("flights",flightsForReal);
         return "summary";
+    }
+
+//    @RequestMapping("/prettypass")
+//    public String prettyPass(Principal principal, Model model) {
+//        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+//        ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
+//        model.addAttribute("list", trips);
+//        HashMap<Long, String> datesTo = new HashMap<>();
+//        HashMap<Long, String> datesFrom = new HashMap<>();
+//        for (Trip trip : trips) {
+//            long toId = trip.getFlightToId();
+//            long fromId = trip.getFlightFromId();
+//            if (toId != 0) {
+//                datesTo.put(toId, flightRepository.findById(toId).getDate());
+//            }
+//            if (fromId != 0) {
+//                datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
+//            }
+//        }
+//        model.addAttribute("to", datesTo);
+//        model.addAttribute("from", datesFrom);
+//        return "prettypass";
+//    }
+
+    @RequestMapping("/boardingPass")
+    public String boardingPass(Principal principal, Model model) {
+        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
+        model.addAttribute("list", trips);
+        HashMap<Long, String> datesTo = new HashMap<>();
+        HashMap<Long, String> datesFrom = new HashMap<>();
+        for (Trip trip : trips) {
+            long toId = trip.getFlightToId();
+            long fromId = trip.getFlightFromId();
+            if (toId != 0) {
+                datesTo.put(toId, flightRepository.findById(toId).getDate());
+            }
+            if (fromId != 0) {
+                datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
+            }
+        }
+        model.addAttribute("to", datesTo);
+        model.addAttribute("from", datesFrom);
+        return "prettypass";
     }
 }
 
