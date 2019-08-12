@@ -54,12 +54,12 @@ public class JosephController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
         model.addAttribute("user", user);
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             return "registration";
         } else {
             user.setRoles(Arrays.asList(roleRepository.findByRole("USER")));
             userRepository.save(user);
-            model.addAttribute("created",  true);
+            model.addAttribute("created", true);
         }
         return "login";
     }
@@ -71,10 +71,6 @@ public class JosephController {
     }
 
     static String setNameData(Model model, Trip trip, TripRepository tripRepository) {
-        trip.setPassengers(2);
-        trip.setType(1L);
-
-        tripRepository.save(trip);
 
         ArrayList<Person> persons = new ArrayList<>();
 
@@ -137,62 +133,69 @@ public class JosephController {
 
     @PostMapping("/processFinalize")
     public String addName(@RequestParam(name = "id") long id, Principal principal, Model model) {
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
         trip.setUserId(user.getId());
         tripRepository.save(trip);
         return "redirect:/boardingPass";
     }
 
-//    @RequestMapping("/boardingPass")
-//    public String boardingPass(Principal principal, Model model) {
-//        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
-//        ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
-//        model.addAttribute("list", trips);
-//        HashMap<Long, String> datesTo = new HashMap<>();
-//        HashMap<Long, String> datesFrom = new HashMap<>();
-//        for (Trip trip : trips) {
-//            long toId = trip.getFlightToId();
-//            long fromId = trip.getFlightFromId();
-//            if (toId != 0) {
-//                datesTo.put(toId, flightRepository.findById(toId).getDate());
-//            }
-//            if (fromId != 0) {
-//                datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
-//            }
-//        }
-//        model.addAttribute("to", datesTo);
-//        model.addAttribute("from", datesFrom);
-//        return "boardingpass";
-//    }
+    @RequestMapping("/boardingPass")
+    public String boardingPass(Principal principal, Model model) {
+        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
+        model.addAttribute("list", trips);
+        HashMap<Long, String> datesTo = new HashMap<>();
+        HashMap<Long, String> datesFrom = new HashMap<>();
+        for (Trip trip : trips) {
+            long toId = trip.getFlightToId();
+            long fromId = trip.getFlightFromId();
+            if (toId != 0) {
+                datesTo.put(toId, flightRepository.findById(toId).getDate());
+            }
+            if (fromId != 0) {
+                datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
+            }
+        }
+        model.addAttribute("to", datesTo);
+        model.addAttribute("from", datesFrom);
+        return "boardingpass";
+    }
+
+    @RequestMapping("/viewTicket/{id}")
+    public String viewTicket(@PathVariable("id") long id, Principal principal, Model model) {
+        Trip trip = tripRepository.findById(id);
+        Flight flightTo = flightRepository.findById(trip.getFlightToId());
+        Flight flightFrom = flightRepository.findById(trip.getFlightFromId());
+        return "prettypass";
+    }
 
     @RequestMapping("/search")
-    public String loadFlightPage(@RequestParam(name = "type", required=false) long tripType,
-                                 @RequestParam(name = "class", required=false) long flightClass,
-                                 @RequestParam(name = "passengers", required=false) long passengers,
-                                 @RequestParam(name = "destFrom", required=false) String destFrom,
-                                 @RequestParam(name = "destTo", required=false) String destTo,
-                                 @RequestParam(name = "fromDate", required=false) String fromDate,
-                                 @RequestParam(name = "toDate", required=false) String toDate,
-                                 Model model, Principal principal)
-    {
+    public String loadFlightPage(@RequestParam(name = "type", required = false) long tripType,
+                                 @RequestParam(name = "class", required = false) long flightClass,
+                                 @RequestParam(name = "passengers", required = false) long passengers,
+                                 @RequestParam(name = "destFrom", required = false) String destFrom,
+                                 @RequestParam(name = "destTo", required = false) String destTo,
+                                 @RequestParam(name = "fromDate", required = false) String fromDate,
+                                 @RequestParam(name = "toDate", required = false) String toDate,
+                                 Model model, Principal principal) {
 
         Trip trip = new Trip();
         trip.setPassengers(passengers);
         trip.setType(flightClass);
         tripRepository.save(trip);
 
-        fromDate = fromDate.split("-")[1] + "/" + fromDate.split("-")[2] + "/" + fromDate.split("-")[0];
-        toDate = toDate.split("-")[1] + "/" + toDate.split("-")[2] + "/" + toDate.split("-")[0];
+//        fromDate = fromDate.split("-")[1] + "/" + fromDate.split("-")[2] + "/" + fromDate.split("-")[0];
+//        toDate = toDate.split("-")[1] + "/" + toDate.split("-")[2] + "/" + toDate.split("-")[0];
 
         ArrayList<Flight> flights = new ArrayList<>();
         for (Flight flight : flightRepository.findAll()) {
             if (flight.getAvailableSeats() >= trip.getPassengers() &&
-                TravelHelper.isAvailable(trip.getType(), flight.getFlightClass()) &&
-                flight.getDate().contains(fromDate) &&
-                flight.getFromLocation().contains(destFrom) &&
+                    TravelHelper.isAvailable(trip.getType(), flight.getFlightClass()) &&
+                    flight.getDate().contains(fromDate) &&
+                    flight.getFromLocation().contains(destFrom) &&
                     flight.getToLocation().contains(destTo)) {
-                    flights.add(flight);
+                flights.add(flight);
             }
         }
 
@@ -200,7 +203,7 @@ public class JosephController {
         model.addAttribute("destTo", destTo);
         model.addAttribute("toDate", toDate);
         model.addAttribute("flights", flights);
-        model.addAttribute("tripId",trip.getId());
+        model.addAttribute("tripId", trip.getId());
         if (tripType == 1) {
             model.addAttribute("on", "Departure");
         } else {

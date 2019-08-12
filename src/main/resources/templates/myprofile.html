@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="base::header">
+<body class="page">
+<div th:replace="base::nav"></div>
+
+<div class="main"><br>
+    <!--    <div class=container style="background-color:#DCDCDC; border-radius: 25px; padding: 20px; width:800px; margin:0 auto; text-align: center;">-->
+    <div class=container
+         style="background-image: url('https://images.all-free-download.com/images/graphiclarge/flying_airplane_background_colorful_decoration_6827698.jpg'); border-radius: 25px; padding: 20px; width:500px; margin:0 auto; text-align: center;">
+        <h1>My Profile</h1>
+        <hr>
+        <p style="text-align: center;">
+            <tr th:each="user : ${users}">
+                <b>
+                    <th>Hello:</th>
+                    <td th:text="${user.firstName}+' '+${user.lastName}"></td>
+                </b><br>
+                <img src="https://secure.gravatar.com/avatar/?s=96&d=https%3A%2F%2Fnews.microsoft.com%2Fwp-content%2Fthemes%2Fmicrosoft-news-center-2016%2Fassets%2Fimg%2Fdefault-avatar.png&r=g"
+                     alt="avatar" width="200" height="200" class="center"><br>
+                <b>
+                    <th>Birthday:</th>
+                </b>
+                <td th:text="${user.birthDate}"></td>
+                <br/>
+                <b>
+                    <th>Origin Country:</th>
+                </b>
+                <td th:text="${user.country}"></td>
+                <br/>
+                <b>
+                    <th>Email:</th>
+                </b>
+                <td th:text="${user.email}"></td>
+                <br/>
+                <b>
+                    <th>Phone Number:</th>
+                </b>
+                <td th:text="${user.phone}"></td>
+                <br/>
+                <b>
+                    <th>Username:</th>
+                </b>
+                <td th:text="${user.username}"></td>
+                <br/>
+                <a th:href="@{/update/{id}(id = ${user.id})}">Update</a>
+            </tr>
+        </p>
+
+
+    </div>
+</div>
+<div th:replace="base :: footer"></div>
+</body>
+</html>

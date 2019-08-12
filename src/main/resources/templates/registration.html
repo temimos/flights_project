@@ -22,11 +22,11 @@
 
         <label>Date of Birth</label>
         <strong><span th:if="${#fields.hasErrors('birthDate')}">Date Error</span></strong>
-        <input class="form-control" type="text" id="birthDate" placeholder="example@place.com" th:field="*{birthDate}" /><br />
+        <input class="form-control" type="text" id="birthDate" placeholder="mm/dd/yyyy" th:field="*{birthDate}" /><br />
 
         <label>Country</label>
         <strong><span th:if="${#fields.hasErrors('country')}">Country Error</span></strong>
-        <input class="form-control" type="text" id="country" placeholder="example@place.com" th:field="*{country}" /><br />
+        <input class="form-control" type="text" id="country" placeholder="Country" th:field="*{country}" /><br />
 
         <label>E-mail</label>
         <strong><span th:if="${#fields.hasErrors('email')}">E-mail Error</span></strong>
@@ -34,7 +34,7 @@
 
         <label>Phone Number</label>
         <strong><span th:if="${#fields.hasErrors('phone')}">Phone Number Error</span></strong>
-        <input class="form-control" type="text" id="phone" placeholder="301-456-789" th:field="*{phone}" /><br />
+        <input class="form-control" type="text" id="phone" placeholder="###-###-####" th:field="*{phone}" /><br />
 
         <label>Username</label>
         <strong><span th:if="${#fields.hasErrors('username')}">Username Error</span></strong>

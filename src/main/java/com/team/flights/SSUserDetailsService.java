@@ -26,7 +26,7 @@ public class SSUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        try{
+        try {
             User user = userRepository.findByUsername(username);
             if (user == null) {
                 return null;
@@ -40,7 +40,7 @@ public class SSUserDetailsService implements UserDetailsService {
 
     private Set<GrantedAuthority> getAuthorities(User user) {
         Set<GrantedAuthority> authorities = new HashSet<>();
-        for(Role role : user.getRoles()) {
+        for (Role role : user.getRoles()) {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRole());
             authorities.add(grantedAuthority);
         }

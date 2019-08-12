@@ -4,30 +4,40 @@ package com.team.flights.Beans;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 
 @Entity
-@Table(name="User_Data")
+@Table(name = "User_Data")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Min(value = 2)
     private String firstName;
 
+    @Min(value = 2)
     private String lastName;
 
+    @Pattern(regexp = "\\d+\\/\\d+\\/\\d\\d+")
     private String birthDate;
 
+    @Min(value = 2)
     private String country;
 
+    @Pattern(regexp = "\\S+@\\S+[.]\\S+")
     private String email;
 
+    @Pattern(regexp = "(\\d-)*\\d{3}-\\d{3}-\\d{4}")
     private String phone;
 
+    @Min(value = 2)
     private String username;
 
+    @Min(value = 5)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

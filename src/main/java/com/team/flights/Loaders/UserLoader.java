@@ -2,7 +2,9 @@ package com.team.flights.Loaders;
 
 import com.team.flights.Beans.Role;
 import com.team.flights.Beans.User;
+import com.team.flights.Repositories.PersonRepository;
 import com.team.flights.Repositories.RoleRepository;
+import com.team.flights.Repositories.TripRepository;
 import com.team.flights.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,10 +22,21 @@ public class UserLoader implements CommandLineRunner {
     RoleRepository roleRepository;
 
     @Autowired
+    PersonRepository personRepository;
+
+    @Autowired
+    TripRepository tripRepository;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... strings) throws Exception {
+        userRepository.deleteAll();
+        roleRepository.deleteAll();
+        personRepository.deleteAll();
+        tripRepository.deleteAll();
+
         Role userRole = roleRepository.save(new Role("USER"));
         Role adminRole = roleRepository.save(new Role("ADMIN"));
 

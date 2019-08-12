@@ -11,10 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -117,45 +114,44 @@ public class TemiController {
 //        model.addAttribute("from", datesFrom);
 //        return "prettypass";
 //    }
-
-    @RequestMapping("/boardingPass")
-    public String boardingPass(Principal principal, Model model) {
-        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
-        ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
-        model.addAttribute("list", trips);
-        HashMap<Long, String> datesTo = new HashMap<>();
-        HashMap<Long, String> datesFrom = new HashMap<>();
-        for (Trip trip : trips) {
-            long toId = trip.getFlightToId();
-            long fromId = trip.getFlightFromId();
-            if (toId != 0) {
-                datesTo.put(toId, flightRepository.findById(toId).getDate());
-            }
-            if (fromId != 0) {
-                datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
-            }
-        }
-//        Flight flight = flightRepository.findAllByToLocation(to()).get();
-        model.addAttribute("to", datesTo);
-        model.addAttribute("from", datesFrom);
-
-
-        Iterable<Flight> flights = new ArrayList<>();
-        ArrayList<Flight> flightsForReal = new ArrayList<>();
-        flights = flightRepository.findAll();
-        for (Flight flight : flights) {
-            if (user.getId() == flight.getUserId()) {
-                flightsForReal.add(flight);
-            }
-
-            HashMap <String, String> map=getHashMap();
-            String airport = map.get(flight.getToLocation()) ;
-        }
-        model.addAttribute("flights", flightsForReal);
-        mode
-
-        return "prettypass";
-    }
+//
+//    @RequestMapping("/prettyPass")
+//    public String boardingPass(Principal principal, Model model) {
+//        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+//        ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
+//        model.addAttribute("list", trips);
+//        HashMap<Long, String> datesTo = new HashMap<>();
+//        HashMap<Long, String> datesFrom = new HashMap<>();
+//        for (Trip trip : trips) {
+//            long toId = trip.getFlightToId();
+//            long fromId = trip.getFlightFromId();
+//            if (toId != 0) {
+//                datesTo.put(toId, flightRepository.findById(toId).getDate());
+//            }
+//            if (fromId != 0) {
+//                datesFrom.put(fromId, flightRepository.findById(fromId).getDate());
+//            }
+//        }
+////        Flight flight = flightRepository.findAllByToLocation(to()).get();
+//        model.addAttribute("to", datesTo);
+//        model.addAttribute("from", datesFrom);
+//
+//
+//        Iterable<Flight> flights = new ArrayList<>();
+//        ArrayList<Flight> flightsForReal = new ArrayList<>();
+//        flights = flightRepository.findAll();
+//        for (Flight flight : flights) {
+//            if (user.getId() == flight.getUserId()) {
+//                flightsForReal.add(flight);
+//            }
+//
+//            HashMap <String, String> map=getHashMap();
+//            String airport = map.get(flight.getToLocation()) ;
+//        }
+//        model.addAttribute("flights", flightsForReal);
+//
+//        return "prettypass";
+//    }
 
     public static HashMap<String, String> getHashMap() {
 
@@ -169,6 +165,20 @@ public class TemiController {
 
     }
 
+
+    @RequestMapping("/viewTicket/{id}")
+    public String viewTicket(@PathVariable("id") long id, Principal principal, Model model) {
+        Trip trip = tripRepository.findById(id);
+        Flight flightDeparture = flightRepository.findById(trip.getFlightToId());
+        //Flight flightReturn = flightRepository.findById(trip.getFlightFromId());
+        HashMap <String, String> map=getHashMap();
+            String airport = map.get(flightDeparture.getFromLocation()) ;
+            String airpotto = map.get(flightDeparture.getToLocation());
+            model.addAttribute("air", airport);
+            model.addAttribute("airp", airpotto);
+
+        return "prettypass";
+    }
 }
 //
 //String tolocation= "Baltimore";
