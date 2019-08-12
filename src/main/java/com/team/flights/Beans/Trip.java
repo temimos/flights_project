@@ -1,6 +1,8 @@
 package com.team.flights.Beans;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name="Trip_Data")
