@@ -10,6 +10,7 @@
 </head>
 <body>
 <div class="ticket">
+<!--    <form action="#" th:action = "@{/prettypass}" method="post">-->
     <header>
         <div class="company-name">
             American Airlines
@@ -29,7 +30,9 @@
                 Charlotte
             </div>
             <div class="airport-code">
-                CLT
+<!--              <p th:text="${air}"}></p>-->
+                <div class="panel-heading">To Location: <span th:text="${toLoc}"></span></div>
+
             </div>
             <div class="dep-arr-label">
                 Departing
@@ -157,7 +160,7 @@
         </div>
     </section>
 </div>
-
+<!--</form>-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
