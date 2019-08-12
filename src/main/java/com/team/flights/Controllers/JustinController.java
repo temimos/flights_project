@@ -126,31 +126,60 @@ public class JustinController {
             return "admin";
         }
         flightRepository.save(flight);
-        return "index";
+        return "redirect:/";
     }
 
     //------------------------------------------------------------------------------------------------------------------
     @RequestMapping("/myprofile")
     public String profilePage(Model model, Principal principal) {
         User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+//        Long id = user.getId();
+//        user = userRepository.findById(id).get();
         model.addAttribute("users", user);
         return "myprofile";
     }
 
     @RequestMapping("/update/{id}")
     public String updateProfileForm(@PathVariable("id") long id, Model model, Principal principal) {
-        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
-        model.addAttribute("user", user);
+        model.addAttribute("user", userRepository.findById(id).get());
+        model.addAttribute("id",id);
         return "editprofile";
     }
 
     @PostMapping("/processProfile")
-    public String updateProfileProcessForm(@Valid User user, BindingResult result, Model model, Principal principal) {
+    public String updateProfileProcessForm(@Valid User user,
+                                           @RequestParam(value = "firstName", required = false) String firstName,
+                                           @RequestParam(value = "lastName", required = false) String lastName,
+                                           @RequestParam(value = "birthDate", required = false) String birthDate,
+                                           @RequestParam(value = "country", required = false) String country,
+                                           @RequestParam(value = "email", required = false) String email,
+                                           @RequestParam(value = "phone", required = false) String phone,
+                                           @RequestParam(value = "username", required = false) String username,
+                                           @RequestParam(value = "password", required = false) String password,
+                                           @RequestParam(name = "id", required = false) long id,
+                                           BindingResult result, Model model, Principal principal) {
         if (result.hasErrors()) {
             return "editprofile";
         }
+        user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setBirthDate(birthDate);
+        user.setCountry(country);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setUsername(username);
+//        userRepository.updateFirstName(id,firstName);
+//        userRepository.updateLastName(id,lastName);
+//        userRepository.updateBirthDate(id,birthDate);
+//        userRepository.updateCountry(id,country);
+//        userRepository.updateEmail(id,email);
+//        userRepository.updatePhone(id,phone);
+//        userRepository.updateUsername(id,username);
+//        userRepository.updatePassword(id,password);
         userRepository.save(user);
-        return "myprofile";
+        model.addAttribute("users", user);
+        return "myProfile";
     }
     //------------------------------------------------------------------------------------------------------------------
 }
