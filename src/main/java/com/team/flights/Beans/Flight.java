@@ -127,7 +127,8 @@ public class Flight {
         this.availableSeats = availableSeats;
     }
 
-    public Flight(String toLocation, String fromLocation, String date, String departingTime, String arrivalTime, long flightClass, long availableSeats, long price, long userId, long tripId) {
+    public Flight(String toLocation, String fromLocation, String date, String departingTime, String arrivalTime,
+                  long flightClass, long availableSeats, long userId, long tripId){
         this.toLocation = toLocation;
         this.fromLocation = fromLocation;
         this.date = date;
@@ -135,25 +136,9 @@ public class Flight {
         this.arrivalTime = arrivalTime;
         this.flightClass = flightClass;
         this.availableSeats = availableSeats;
-        this.price = price;
         this.userId = userId;
         this.tripId = tripId;
     }
-
-    public Flight(String toLocation, String fromLocation, String date, String departingTime, String arrivalTime,
-                  long flightClass, long availableSeats, long price) {
-        this.toLocation = toLocation;
-        this.fromLocation = fromLocation;
-        this.date = date;
-        this.departingTime = departingTime;
-        this.arrivalTime = arrivalTime;
-        this.flightClass = flightClass;
-        this.availableSeats = availableSeats;
-        this.price = price;
-        this.userId = 0;
-        this.tripId = 0;
-    }
-
     public Flight() {
     }
 

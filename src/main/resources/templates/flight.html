@@ -8,7 +8,7 @@
 <div th:replace="base::nav"></div>
 <div class="container">
     <h1 th:text="${on} + ' Flights:'"></h1>
-        <table class="table table-dark">
+    <table class="table table-dark">
         <thead class="thead-light">
         <tr>
             <th>Destination</th>
@@ -24,14 +24,14 @@
         </thead>
         <tbody th:each="flight : ${flights}">
         <tr>
-            <td th:text = "${flight.toLocation}"></td>
-            <td th:text = "${flight.fromLocation}"></td>
-            <td th:text = "${flight.date}"></td>
-            <td th:text = "${flight.departingTime}"></td>
-            <td th:text = "${flight.arrivalTime}"></td>
+            <td th:text="${flight.toLocation}"></td>
+            <td th:text="${flight.fromLocation}"></td>
+            <td th:text="${flight.date}"></td>
+            <td th:text="${flight.departingTime}"></td>
+            <td th:text="${flight.arrivalTime}"></td>
             <!--<td th:text = "${flight.flightClass}"></td>-->
-            <td th:text = "${flight.availableSeats}"></td>
-            <td th:text = "'$'+${flight.price}"></td>
+            <td th:text="${flight.availableSeats}"></td>
+            <td th:text="'$'+${flight.price}"></td>
             <td>
                 <form action="#" th:action="@{/flightprocess}" method="post">
                     <input hidden th:value="${tripId}" id="tripId" name="tripId"/>

@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,42 +46,43 @@ public class JustinController {
 
     //------------------------------------------------------------------------------------------------------------------
     @PostMapping("/processpayment")
-    public String processPaymentForm(@RequestParam(value = "name",required=false) String name,
-                                     @RequestParam(value = "creditcardnumber",required=false) String creditcardnumber,
-                                     @RequestParam(value = "cvv",required=false) String cvv,
-                                     @RequestParam(value = "expirationdate",required=false) String expirationdate,
-                                     @RequestParam(name = "id",required=false) long id,
-                                     Model model, Principal principal){
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+    public String processPaymentForm(@RequestParam(value = "name", required = false) String name,
+                                     @RequestParam(value = "creditcardnumber", required = false) String creditcardnumber,
+                                     @RequestParam(value = "cvv", required = false) String cvv,
+                                     @RequestParam(value = "expirationdate", required = false) String expirationdate,
+                                     @RequestParam(name = "id", required = false) long id,
+                                     Model model, Principal principal) {
+        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
-        model.addAttribute("toLoc",flightRepository.findById(trip.getFlightToId()).getToLocation());
-        model.addAttribute("fromLoc",flightRepository.findById(trip.getFlightToId()).getFromLocation());
-        String data = name+", "+creditcardnumber+", "+cvv+", "+expirationdate;
+        model.addAttribute("toLoc", flightRepository.findById(trip.getFlightToId()).getToLocation());
+        model.addAttribute("fromLoc", flightRepository.findById(trip.getFlightToId()).getFromLocation());
+        String data = name + ", " + creditcardnumber + ", " + cvv + ", " + expirationdate;
         model.addAttribute("trips", trip);
         trip.setCreditCard(data);
-        model.addAttribute("users",user);
+        model.addAttribute("users", user);
         model.addAttribute("id", trip.getId());
         tripRepository.save(trip);
         return "finalize";
     }
+
     //------------------------------------------------------------------------------------------------------------------
     @RequestMapping("/flight")
     public String loadFlightPage(Model model) {
-        model.addAttribute("flights",flightRepository.findAll());
+        model.addAttribute("flights", flightRepository.findAll());
         Trip trip = new Trip();
         tripRepository.save(trip);
-        model.addAttribute("tripId",trip.getId());
-        model.addAttribute("on","departure");
+        model.addAttribute("tripId", trip.getId());
+        model.addAttribute("on", "departure");
         return "flight";
     }
 
     @PostMapping("/flightprocess")
-    public String processFlight(@RequestParam(name = "destFrom", required=false) String destFrom,
-                                @RequestParam(name = "destTo", required=false) String destTo,
-                                @RequestParam(name = "toDate", required=false) String toDate,
-                                @RequestParam(name = "id",required=false) long id,
-                                @RequestParam(name = "tripId",required=false) long tripId,
-                                @RequestParam(name = "on",required=false) String on, Model model, Principal principal) {
+    public String processFlight(@RequestParam(name = "destFrom", required = false) String destFrom,
+                                @RequestParam(name = "destTo", required = false) String destTo,
+                                @RequestParam(name = "toDate", required = false) String toDate,
+                                @RequestParam(name = "id", required = false) long id,
+                                @RequestParam(name = "tripId", required = false) long tripId,
+                                @RequestParam(name = "on", required = false) String on, Model model, Principal principal) {
         Trip trip = tripRepository.findById(tripId);
 
         if (on.equals("Departure")) {
@@ -110,21 +112,45 @@ public class JustinController {
             return setNameData(model, trip, tripRepository);
         }
     }
+
     //------------------------------------------------------------------------------------------------------------------
     @RequestMapping("/admin")
     public String adminPage(Model model) {
-        model.addAttribute("flight",new Flight());
+        model.addAttribute("flight", new Flight());
         return "admin";
     }
 
     @PostMapping("/adminprocess")
     public String adminProcessPage(@Valid Flight flight, BindingResult result) {
-        if(result.hasErrors())
-        {
+        if (result.hasErrors()) {
             return "admin";
         }
         flightRepository.save(flight);
-        return "redirect:/";
+        return "index";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    @RequestMapping("/myprofile")
+    public String profilePage(Model model, Principal principal) {
+        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        model.addAttribute("users", user);
+        return "myprofile";
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updateProfileForm(@PathVariable("id") long id, Model model, Principal principal) {
+        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        model.addAttribute("user", user);
+        return "editprofile";
+    }
+
+    @PostMapping("/processProfile")
+    public String updateProfileProcessForm(@Valid User user, BindingResult result, Model model, Principal principal) {
+        if (result.hasErrors()) {
+            return "editprofile";
+        }
+        userRepository.save(user);
+        return "myprofile";
     }
     //------------------------------------------------------------------------------------------------------------------
 }

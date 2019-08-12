@@ -58,11 +58,9 @@ public class TravelHelper {
         business.add(7L);
         if (eco.contains(request) && eco.contains(planeType)) {
             return true;
-        }
-        else if (first.contains(request) && first.contains(planeType)) {
+        } else if (first.contains(request) && first.contains(planeType)) {
             return true;
-        }
-        else if (business.contains(request) && business.contains(planeType)) {
+        } else if (business.contains(request) && business.contains(planeType)) {
             return true;
         }
         return false;
