@@ -43,7 +43,7 @@ public class TemiController {
     @Autowired
     RoleRepository roleRepository;
 
-//    @RequestMapping("/")
+    //    @RequestMapping("/")
 //    public String listCourses(Model model) {
 //        model.addAttribute("flightsto",getToLocations() );
 //        return "index";
@@ -69,19 +69,19 @@ public class TemiController {
     }
 
     @RequestMapping("/summary")
-    public String contactform(  Model model, Principal principal) {
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
-        model.addAttribute("user",((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser());
+    public String contactform(Model model, Principal principal) {
+        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        model.addAttribute("user", ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser());
 
         Iterable<Flight> flights = new ArrayList<>();
         ArrayList<Flight> flightsForReal = new ArrayList<>();
-        flights=flightRepository.findAll();
-        for (Flight flight : flights){
-            if(user.getId() == flight.getUserId()){
+        flights = flightRepository.findAll();
+        for (Flight flight : flights) {
+            if (user.getId() == flight.getUserId()) {
                 flightsForReal.add(flight);
             }
         }
-        model.addAttribute("flights",flightsForReal);
+        model.addAttribute("flights", flightsForReal);
         return "summary";
     }
 
@@ -109,7 +109,7 @@ public class TemiController {
 
     @RequestMapping("/boardingPass")
     public String boardingPass(Principal principal, Model model) {
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         ArrayList<Trip> trips = tripRepository.findAllByUserId(user.getId());
         model.addAttribute("list", trips);
         HashMap<Long, String> datesTo = new HashMap<>();

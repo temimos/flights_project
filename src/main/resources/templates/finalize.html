@@ -7,7 +7,7 @@
 <body>
 <div th:replace="base::nav"></div>
 <div class="container">
-    <div class = "main">
+    <div class="main">
         <!------------------------------------------------------------------------------------------------------------------------------------------>
         <div class="container rounded">
             <h1>Please Review Your Trip Order:</h1><br/>
@@ -16,42 +16,61 @@
             <div th:text="${cvv}"></div>
             <div th:text="${expirationdate}"></div>
 
-            <div class = "row container">
+            <div class="row container">
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
                 <div class="card m-2" style="width: 17rem;" th:each="user : ${users}">
-                    <div class="card-header bg-warning text-white">Personal Details</div><br>
+                    <div class="card-header bg-warning text-white">Personal Details</div>
+                    <br>
                     <div class="card-body">
-                        <div class="panel-heading">Name: <span th:text = "${user.firstName}"></span> <span th:text = "${user.lastName}"></span></div><br>
-                        <div class="panel-heading">DOB: <span th:text = "${user.birthDate}"></span></div><br>
-                        <div class="panel-heading">Email: <span th:text = "${user.email}"></span></div><br>
-                        <div class="panel-heading">Phone: <span th:text = "${user.phone}"></span></div><br>
+                        <div class="panel-heading">Name: <span th:text="${user.firstName}"></span> <span
+                                th:text="${user.lastName}"></span></div>
+                        <br>
+                        <div class="panel-heading">DOB: <span th:text="${user.birthDate}"></span></div>
+                        <br>
+                        <div class="panel-heading">Email: <span th:text="${user.email}"></span></div>
+                        <br>
+                        <div class="panel-heading">Phone: <span th:text="${user.phone}"></span></div>
+                        <br>
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
                 <div class="card m-2" style="width: 17rem;" th:each="trip : ${trips}">
-                    <div class="card-header bg-warning text-white">Your Flight Details:</div><br>
+                    <div class="card-header bg-warning text-white">Your Flight Details:</div>
+                    <br>
                     <div class="card-body">
-                        <div class="panel-heading">Flight Type: <span th:text = "${trip.type}"></span></div><br>
-                        <div class="panel-heading">Passengers: <span th:text = "${trip.passengers}"></span></div><br>
-                        <div class="panel-heading">To Location: <span th:text = "${toLoc}"></span></div><br>
-                        <div class="panel-heading">From Location: <span th:text = "${fromLoc}"></span></div><br>
+                        <div class="panel-heading">Flight Type: <span th:text="${trip.type}"></span></div>
+                        <br>
+                        <div class="panel-heading">Passengers: <span th:text="${trip.passengers}"></span></div>
+                        <br>
+                        <div class="panel-heading">To Location: <span th:text="${toLoc}"></span></div>
+                        <br>
+                        <div class="panel-heading">From Location: <span th:text="${fromLoc}"></span></div>
+                        <br>
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
                 <div class="card m-2" style="width: 17rem;" th:each="trip : ${trips}">
-                    <div class="card-header bg-warning text-white">Payment Details:</div><br>
+                    <div class="card-header bg-warning text-white">Payment Details:</div>
+                    <br>
                     <div class="card-body">
-                        <div class="panel-heading">Name: <span th:text = "${trip.creditCard.split(', ')[0]}"></span></div><br>
-                        <div class="panel-heading">Credit Card Number: <span th:text = "${trip.creditCard.split(', ')[1]}"></span></div><br>
-                        <div class="panel-heading">CVV: <span th:text = "${trip.creditCard.split(', ')[2]}"></span></div><br>
-                        <div class="panel-heading">Expiration Date: <span th:text = "${trip.creditCard.split(', ')[3]}"></span></div><br>
+                        <div class="panel-heading">Name: <span th:text="${trip.creditCard.split(', ')[0]}"></span></div>
+                        <br>
+                        <div class="panel-heading">Credit Card Number: <span
+                                th:text="${trip.creditCard.split(', ')[1]}"></span></div>
+                        <br>
+                        <div class="panel-heading">CVV: <span th:text="${trip.creditCard.split(', ')[2]}"></span></div>
+                        <br>
+                        <div class="panel-heading">Expiration Date: <span
+                                th:text="${trip.creditCard.split(', ')[3]}"></span></div>
+                        <br>
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
             </div>
             <form action="#" th:action="@{/processFinalize}" method="post">
                 <input hidden th:value="${id}" id="id" name="id"/>
-                <p><input class="btn btn-primary" type="submit" value="Submit"/> <a class="btn btn-primary" href="/">Cancel</a></p>
+                <p><input class="btn btn-primary" type="submit" value="Submit"/> <a class="btn btn-primary" href="/">Cancel</a>
+                </p>
             </form>
         </div>
     </div>

@@ -3,37 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
 </head>
 <body>
 <div th:replace="base :: header"></div>
 <div th:replace="base :: nav"></div>
 <form action="#" th:action="@{/addName}" method="post">
-<div class="container">
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-        <tr>
-            <th>Enter the names of the passengers</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="person : ${list}">
-            <td th:if="${person.name.length()} > 0" th:text="${person.name}"></td>
-            <td th:if="${person.name.length()} == 0">
+    <div class="container">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Enter the names of the passengers</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="person : ${list}">
+                <td th:if="${person.name.length()} > 0" th:text="${person.name}"></td>
+                <td th:if="${person.name.length()} == 0">
                     <input class="form-control" placeholder="Name" type="text" name="person" id="person"/>
                     <input hidden th:value="${id}" id="id" name="id"/>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <p th:text="${num} + ' of ' + ${total} + ' passengers'"></p>
-    <input class="btn btn-primary" th:value="${btnText}" type="submit"/>
-    <a class="btn btn-danger" href="/form">Reset Names</a>
-</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p th:text="${num} + ' of ' + ${total} + ' passengers'"></p>
+        <input class="btn btn-primary" th:value="${btnText}" type="submit"/>
+        <a class="btn btn-danger" href="/form">Reset Names</a>
+    </div>
 </form>
 <div th:replace="base :: footer"></div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </body>
 </html>

@@ -54,12 +54,12 @@ public class JosephController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
         model.addAttribute("user", user);
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             return "registration";
         } else {
             user.setRoles(Arrays.asList(roleRepository.findByRole("USER")));
             userRepository.save(user);
-            model.addAttribute("created",  true);
+            model.addAttribute("created", true);
         }
         return "login";
     }
@@ -137,7 +137,7 @@ public class JosephController {
 
     @PostMapping("/processFinalize")
     public String addName(@RequestParam(name = "id") long id, Principal principal, Model model) {
-        User user = ((CustomUserDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
+        User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
         trip.setUserId(user.getId());
         tripRepository.save(trip);
@@ -167,15 +167,14 @@ public class JosephController {
 //    }
 
     @RequestMapping("/search")
-    public String loadFlightPage(@RequestParam(name = "type", required=false) long tripType,
-                                 @RequestParam(name = "class", required=false) long flightClass,
-                                 @RequestParam(name = "passengers", required=false) long passengers,
-                                 @RequestParam(name = "destFrom", required=false) String destFrom,
-                                 @RequestParam(name = "destTo", required=false) String destTo,
-                                 @RequestParam(name = "fromDate", required=false) String fromDate,
-                                 @RequestParam(name = "toDate", required=false) String toDate,
-                                 Model model, Principal principal)
-    {
+    public String loadFlightPage(@RequestParam(name = "type", required = false) long tripType,
+                                 @RequestParam(name = "class", required = false) long flightClass,
+                                 @RequestParam(name = "passengers", required = false) long passengers,
+                                 @RequestParam(name = "destFrom", required = false) String destFrom,
+                                 @RequestParam(name = "destTo", required = false) String destTo,
+                                 @RequestParam(name = "fromDate", required = false) String fromDate,
+                                 @RequestParam(name = "toDate", required = false) String toDate,
+                                 Model model, Principal principal) {
 
         Trip trip = new Trip();
         trip.setPassengers(passengers);
@@ -188,11 +187,11 @@ public class JosephController {
         ArrayList<Flight> flights = new ArrayList<>();
         for (Flight flight : flightRepository.findAll()) {
             if (flight.getAvailableSeats() >= trip.getPassengers() &&
-                TravelHelper.isAvailable(trip.getType(), flight.getFlightClass()) &&
-                flight.getDate().contains(fromDate) &&
-                flight.getFromLocation().contains(destFrom) &&
+                    TravelHelper.isAvailable(trip.getType(), flight.getFlightClass()) &&
+                    flight.getDate().contains(fromDate) &&
+                    flight.getFromLocation().contains(destFrom) &&
                     flight.getToLocation().contains(destTo)) {
-                    flights.add(flight);
+                flights.add(flight);
             }
         }
 
@@ -200,7 +199,7 @@ public class JosephController {
         model.addAttribute("destTo", destTo);
         model.addAttribute("toDate", toDate);
         model.addAttribute("flights", flights);
-        model.addAttribute("tripId",trip.getId());
+        model.addAttribute("tripId", trip.getId());
         if (tripType == 1) {
             model.addAttribute("on", "Departure");
         } else {

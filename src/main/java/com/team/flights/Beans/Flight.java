@@ -3,7 +3,7 @@ package com.team.flights.Beans;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Flight_Data")
+@Table(name = "Flight_Data")
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -128,7 +128,7 @@ public class Flight {
     }
 
     public Flight(String toLocation, String fromLocation, String date, String departingTime, String arrivalTime,
-                  long flightClass, long availableSeats, long userId, long tripId){
+                  long flightClass, long availableSeats, long userId, long tripId) {
         this.toLocation = toLocation;
         this.fromLocation = fromLocation;
         this.date = date;
@@ -139,6 +139,7 @@ public class Flight {
         this.userId = userId;
         this.tripId = tripId;
     }
+
     public Flight() {
     }
 

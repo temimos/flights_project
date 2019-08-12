@@ -28,7 +28,7 @@ public class FlightLoader implements CommandLineRunner {
     RoleRepository roleRepository;
 
     @Override
-    public void run(String...strings) throws Exception {
+    public void run(String... strings) throws Exception {
         //Constructors
         //==============================================================================================================
         Flight flight = new Flight();
