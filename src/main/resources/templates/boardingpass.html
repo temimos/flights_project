@@ -28,12 +28,14 @@
                     ${trip.creditCard.split(', ')[1].substring(12)}"></td>
             <td th:if="${trip.creditCard.split(', ')[1].length()} < 16"
                 th:text="'Unknown Credit Card'"></td>
-            <td th:if="${trip.flightToId} != 0" th:text="'Roundtrip'">
-                <p th:text="${from.get(trip.id)}"></p>
-                <p th:text="${to.get(trip.id)}"></p>
+            <td th:if="${trip.flightFromId} != 0">
+                <p th:text="'Roundtrip'"></p>
+                <p th:text="${from.get(trip.flightFromId)}"></p>
+                <p th:text="${to.get(trip.flightToId)}"></p>
             </td>
-            <td th:if="${trip.flightToId} == 0" th:text="'One-way Flight'">
-                <p th:text="${from.get(trip.id)}"></p>
+            <td th:if="${trip.flightFromId} == 0" >
+                <p th:text="'One-way Flight'"></p>
+                <p th:text="${from.get(trip.flightFromId)}"></p>
             </td>
             <td>
                 <a class="btn btn-primary" th:href="@{/viewTicket/{id}(id=${trip.id})}">
