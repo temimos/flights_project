@@ -209,21 +209,22 @@ public class TemiController {
     public String viewTicket(@PathVariable("id") long id, Principal principal, Model model) {
         Trip trip = tripRepository.findById(id);
         Flight flightDeparture = flightRepository.findById(trip.getFlightToId());
-        //Flight flightReturn = flightRepository.findById(trip.getFlightFromId());
+        Flight flightReturn = flightRepository.findById(trip.getFlightFromId());
         HashMap <String, String> map=getHashMap();
-            String airport = map.get(flightDeparture.getFromLocation()) ;
-            String airpotto = map.get(flightDeparture.getToLocation());
+        String airport = map.get(flightDeparture.getFromLocation());
+        String airpotto = map.get(flightDeparture.getToLocation());
         String arrivalTime= flightDeparture.getArrivalTime();
         String depTime= flightDeparture.getDepartingTime();
         String depTime2= flightDeparture.getDepartingTime();
 
 
         model.addAttribute("air", airport);
-            model.addAttribute("airp", airpotto);
-            model.addAttribute("flight", flightDeparture);
+        model.addAttribute("airp", airpotto);
+        model.addAttribute("flight", flightDeparture);
         model.addAttribute("aTime", arrivalTime);
 
         model.addAttribute("depTime", depTime);
+        model.addAttribute("flightReturn", flightReturn);
 
         return "prettypass";
     }
