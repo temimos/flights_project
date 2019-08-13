@@ -111,6 +111,7 @@ public class JosephController {
                     model.addAttribute("people", finished);
                     model.addAttribute("trip", trip);
                     model.addAttribute("id", trip.getId());
+                    model.addAttribute("error", "");
                     return "creditcard";
                 }
             }
