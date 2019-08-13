@@ -111,6 +111,7 @@ public class JosephController {
                     model.addAttribute("people", finished);
                     model.addAttribute("trip", trip);
                     model.addAttribute("id", trip.getId());
+                    model.addAttribute("error", "");
                     return "creditcard";
                 }
             }
@@ -161,7 +162,7 @@ public class JosephController {
         model.addAttribute("from", datesFrom);
         return "boardingpass";
     }
-
+//
 //    @RequestMapping("/viewTicket/{id}")
 //    public String viewTicket(@PathVariable("id") long id, Principal principal, Model model) {
 //        Trip trip = tripRepository.findById(id);

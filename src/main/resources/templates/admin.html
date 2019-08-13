@@ -4,11 +4,12 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="base::header">
-<body class="page">
-<div th:replace="base::nav"></div>
+<body class="page" style="background-image: url('https://cdn.shopify.com/s/files/1/0763/4793/files/Best_tips_for_flying_with_a_newborn_baby.jpg?v=1515194760'); background-repeat: no-repeat; background-size: cover;">
+<div th:replace="base::nav"></div><br>
 
 <div class="main">
-    <div class="container">
+    <div class=container
+         style="background-color: rgba(255, 255, 255, 0.5);  border-radius: 25px; padding: 20px; width:800px; margin:0 auto; text-align: center;"><br>
         <h1>Add a Flight</h1><br/>
         <div class="container rounded">
             <form action="#"
@@ -18,15 +19,25 @@
                 <div class="form-group col-md9">
                     <input type="hidden" class="form-control" th:field="*{id}"/>
                     Destination:<br/>
-                    <input type="text" class="form-control" th:field="*{toLocation}"/>
+                    <select class="custom-select mr-sm-2" th:field="*{toLocation}" name="destFrom" id="destFrom">
+                        <option th:each="place : ${flightsfrom}"
+                                th:value="${place}"
+                                th:text="${place}">
+                        </option>
+                    </select><br/>
                     <span th:if="${#fields.hasErrors('toLocation')}"
                           th:errors="*{toLocation}"></span><br/>
                     Departure:<br/>
-                    <input type="text" class="form-control" th:field="*{fromLocation}"/>
+                    <select class="custom-select mr-sm-2" th:field="*{fromLocation}" name="destTo" id="destTo">
+                        <option th:each="place : ${flightsto}"
+                                th:value="${place}"
+                                th:text="${place}">
+                        </option>
+                    </select><br/>
                     <span th:if="${#fields.hasErrors('fromLocation')}"
                           th:errors="*{fromLocation}"></span><br/>
                     Date:<br/>
-                    <input type="text" class="form-control" th:field="*{date}"/>
+                    <input type="date" class="form-control" th:value="${date}" th:field="*{date}"/>
                     <span th:if="${#fields.hasErrors('date')}"
                           th:errors="*{date}"></span><br/>
                     Departing Time:<br/>
@@ -42,7 +53,29 @@
                     <span th:if="${#fields.hasErrors('availableSeats')}"
                           th:errors="*{availableSeats}"></span><br/>
                     Flight Class:<br/>
-                    <input type="text" class="form-control" th:field="*{flightClass}"/>
+                    <select class="custom-select mr-sm-2" th:field="*{flightClass}">
+                        <option th:value="1"
+                                th:text="'Economy'">
+                        </option>
+                        <option th:value="2"
+                                th:text="'First Class'">
+                        </option>
+                        <option th:value="3"
+                                th:text="'Business'">
+                        </option>
+                        <option th:value="4"
+                                th:text="'Economy and First Class'">
+                        </option>
+                        <option th:value="5"
+                                th:text="'First Class and Business'">
+                        </option>
+                        <option th:value="6"
+                                th:text="'Economy and Business'">
+                        </option>
+                        <option th:value="7"
+                                th:text="'Economy, First Class, and Business'">
+                        </option>
+                    </select><br/>
                     <span th:if="${#fields.hasErrors('flightClass')}"
                           th:errors="*{flightClass}"></span><br/>
                     Price:<br/>

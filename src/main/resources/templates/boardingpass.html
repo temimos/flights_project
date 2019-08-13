@@ -6,11 +6,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
 </head>
-<body>
+<body style="background-image: url('https://images4.alphacoders.com/528/thumb-1920-52896.jpg'); background-repeat: no-repeat; background-size: cover;">
 <div th:replace="base :: header"></div>
 <div th:replace="base :: nav"></div>
 
 <div class="container">
+    <h1>Your Tickets:</h1><br/>
     <table class="table table-bordered">
         <thead class="thead-dark">
         <tr>
@@ -28,12 +29,14 @@
                     ${trip.creditCard.split(', ')[1].substring(12)}"></td>
             <td th:if="${trip.creditCard.split(', ')[1].length()} < 16"
                 th:text="'Unknown Credit Card'"></td>
-            <td th:if="${trip.flightToId} != 0" th:text="'Roundtrip'">
-                <p th:text="${from.get(trip.id)}"></p>
-                <p th:text="${to.get(trip.id)}"></p>
+            <td th:if="${trip.flightFromId} != 0">
+                <p th:text="'Roundtrip'"></p>
+                <p th:text="${from.get(trip.flightFromId)}"></p>
+                <p th:text="${to.get(trip.flightToId)}"></p>
             </td>
-            <td th:if="${trip.flightToId} == 0" th:text="'One-way Flight'">
-                <p th:text="${from.get(trip.id)}"></p>
+            <td th:if="${trip.flightFromId} == 0" >
+                <p th:text="'One-way Flight'"></p>
+                <p th:text="${from.get(trip.flightFromId)}"></p>
             </td>
             <td>
                 <a class="btn btn-primary" th:href="@{/viewTicket/{id}(id=${trip.id})}">
