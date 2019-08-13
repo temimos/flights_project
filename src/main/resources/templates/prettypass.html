@@ -37,7 +37,7 @@
                 Departing
             </div>
             <div class="time">
-                7:45am
+                <span th:text="${depTime}"></span>
             </div>
         </div>
         <div class="airport">
@@ -52,7 +52,7 @@
                 Arriving
             </div>
             <div class="time">
-                9:15am
+                <span th:text="${aTime}"></span>
             </div>
         </div>
     </section>
@@ -103,30 +103,34 @@
     <section class="airports">
         <div class="airport">
             <div class="airport-name">
-                Charlotte
+                <span th:text="${flight.fromLocation}"></span>
+
             </div>
             <div class="airport-code">
-                CLT
+                <span th:text="${air}"></span>
+
             </div>
             <div class="dep-arr-label">
                 Departing
             </div>
             <div class="time">
-                7:45am
+                <span th:text="${depTime}"></span>
             </div>
         </div>
         <div class="airport">
             <div class="airport-name">
-                Tampa
+                <span th:text="${flight.toLocation}"></span>
+
             </div>
             <div class="airport-code">
-                TPA
+                <span th:text="${airp}"></span>
+
             </div>
             <div class="dep-arr-label">
                 Arriving
             </div>
             <div class="time">
-                9:15am
+                <span th:text="${aTime}"></span>
             </div>
         </div>
     </section>
