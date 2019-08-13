@@ -19,7 +19,7 @@
             <div class="row container">
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
                 <div class="card m-2" style="width: 17rem;" th:each="user : ${users}">
-                    <div class="card-header bg-warning text-white">Personal Details</div>
+                    <div class="card-header bg-warning text-white">User Details</div>
                     <br>
                     <div class="card-body">
                         <div class="panel-heading">Name: <span th:text="${user.firstName}"></span> <span
@@ -38,7 +38,7 @@
                     <div class="card-header bg-warning text-white">Your Flight Details:</div>
                     <br>
                     <div class="card-body">
-                        <div class="panel-heading">Flight Type: <span th:text="${trip.type}"></span></div>
+                        <div class="panel-heading">Flight Type: <span th:text="${classMap.get(trip.type)}"></span></div>
                         <br>
                         <div class="panel-heading">Passengers: <span th:text="${trip.passengers}"></span></div>
                         <br>

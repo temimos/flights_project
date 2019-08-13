@@ -82,6 +82,7 @@ public class JustinController {
         trip.setCreditCard(data);
         model.addAttribute("users", user);
         model.addAttribute("id", trip.getId());
+        model.addAttribute("classMap", TravelHelper.getClassMap());
         tripRepository.save(trip);
         return "finalize";
     }
@@ -124,6 +125,7 @@ public class JustinController {
             model.addAttribute("flights", flights);
             model.addAttribute("tripId", trip.getId());
             model.addAttribute("on", "Return");
+            model.addAttribute("classMap", TravelHelper.getClassMap());
             return "flight";
         } else {
             trip.setFlightToId(id);
