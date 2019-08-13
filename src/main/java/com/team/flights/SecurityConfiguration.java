@@ -42,6 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/search",
                         "/index",
                         "/flightprocess",
+                        "/viewTicket/{id}",
                         "/h2-console/**", "/register").permitAll()
                 //.antMatchers("/").access("hasAnyAuthority('USER','ADMIN')")
                 .antMatchers("/admin")

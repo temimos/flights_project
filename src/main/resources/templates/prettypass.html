@@ -82,7 +82,8 @@
             </div>
         </div>
         <div class="qr">
-            <img src="http://www.classtools.net/QR/pics/qr.png"/>
+            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=localhost:8080/viewTicket/'
+                + ${id}"/>
         </div>
     </section>
 </div>
@@ -103,10 +104,10 @@
     <section class="airports">
         <div class="airport">
             <div class="airport-name">
-                Charlotte
+                <span th:text="${flight.toLocation}"></span>
             </div>
             <div class="airport-code">
-                CLT
+                <span th:text="${airp}"></span>
             </div>
             <div class="dep-arr-label">
                 Departing
@@ -117,10 +118,10 @@
         </div>
         <div class="airport">
             <div class="airport-name">
-                Tampa
+                <span th:text="${flight.fromLocation}"></span>
             </div>
-            <div class="airport-code">
-                TPA
+            <div th:text="${air}" class="airport-code">
+                <span th:text="${air}"></span>
             </div>
             <div class="dep-arr-label">
                 Arriving
@@ -156,7 +157,8 @@
             </div>
         </div>
         <div class="qr">
-            <img src="http://www.classtools.net/QR/pics/qr.png"/>
+            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=localhost:8080/viewTicket/'
+                + ${id}"/>
         </div>
     </section>
 </div>
