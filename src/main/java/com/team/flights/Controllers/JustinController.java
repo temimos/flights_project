@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static com.team.flights.Controllers.JosephController.setNameData;
@@ -136,7 +137,12 @@ public class JustinController {
     //------------------------------------------------------------------------------------------------------------------
     @RequestMapping("/admin")
     public String adminPage(Model model) {
-        model.addAttribute("flight", new Flight());
+        Flight flight = new Flight();
+        flight.setDate(LocalDate.now().toString());
+        model.addAttribute("flight", flight);
+        model.addAttribute("flightsto", TravelHelper.getToLocations(flightRepository.findAll()));
+        model.addAttribute("flightsfrom", TravelHelper.getFromLocations(flightRepository.findAll()));
+        model.addAttribute("date", LocalDate.now());
         return "admin";
     }
 
