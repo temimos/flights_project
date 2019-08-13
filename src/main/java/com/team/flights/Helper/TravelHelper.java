@@ -4,6 +4,7 @@ import com.team.flights.Beans.Flight;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class TravelHelper {
 
@@ -14,6 +15,18 @@ public class TravelHelper {
 //    5 = F + B
 //    6 = E + B
 //    7 = E + F + B
+
+    public static HashMap<Long, String> getClassMap() {
+        HashMap<Long, String> map = new HashMap<>();
+        map.put(1L, "Economy");
+        map.put(2L, "First Class");
+        map.put(3L, "Business");
+        map.put(4L, "Economy and First Class");
+        map.put(5L, "First Class and Business");
+        map.put(6L, "Economy and Business");
+        map.put(7L, "Economy, First Class, and Business");
+        return map;
+    }
 
     public static long convertToNumber(String name) {
         name = name.toLowerCase();

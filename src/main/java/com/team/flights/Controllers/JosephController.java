@@ -205,6 +205,7 @@ public class JosephController {
         model.addAttribute("toDate", toDate);
         model.addAttribute("flights", flights);
         model.addAttribute("tripId", trip.getId());
+        model.addAttribute("classMap", TravelHelper.getClassMap());
         if (tripType == 1) {
             model.addAttribute("on", "Departure");
         } else {

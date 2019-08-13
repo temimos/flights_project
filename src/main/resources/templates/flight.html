@@ -16,7 +16,7 @@
             <th>Date</th>
             <th>Departing Time</th>
             <th>Arrival Time</th>
-            <!--<th>Flight Class</th>-->
+            <th>Flight Class</th>
             <th>Available Seats</th>
             <th>Price</th>
             <th>Action</th>
@@ -29,7 +29,7 @@
             <td th:text="${flight.date}"></td>
             <td th:text="${flight.departingTime}"></td>
             <td th:text="${flight.arrivalTime}"></td>
-            <!--<td th:text = "${flight.flightClass}"></td>-->
+            <td th:text = "${classMap.get(flight.flightClass)}"></td>
             <td th:text="${flight.availableSeats}"></td>
             <td th:text="'$'+${flight.price}"></td>
             <td>
