@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="base :: header">
     <meta charset="UTF-8">
     <title>Products</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
 </head>
 <body style="background-image: url('https://images4.alphacoders.com/528/thumb-1920-52896.jpg'); background-repeat: no-repeat; background-size: cover;">
-<div th:replace="base :: header"></div>
 <div th:replace="base :: nav"></div><br>
 
 <div class=container
@@ -32,12 +31,12 @@
                 th:text="'Unknown Credit Card'"></td>
             <td th:if="${trip.flightFromId} != 0">
                 <p th:text="'Roundtrip'"></p>
-                <p th:text="${from.get(trip.flightFromId)}"></p>
-                <p th:text="${to.get(trip.flightToId)}"></p>
+                <p th:text="'Depart Date: ' + ${from.get(trip.flightFromId)}"></p>
+                <p th:text="'Return Date: ' + ${to.get(trip.flightToId)}"></p>
             </td>
             <td th:if="${trip.flightFromId} == 0" >
                 <p th:text="'One-way Flight'"></p>
-                <p th:text="${from.get(trip.flightFromId)}"></p>
+                <p th:text="'Depart Date: ' + ${from.get(trip.flightFromId)}"></p>
             </td>
             <td>
                 <a class="btn btn-primary" th:href="@{/viewTicket/{id}(id=${trip.id})}">
