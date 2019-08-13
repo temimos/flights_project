@@ -27,12 +27,11 @@
     <section class="airports">
         <div class="airport">
             <div class="airport-name">
-                Charlotte
+                <span th:text="${flight.fromLocation}"></span>
+
             </div>
             <div class="airport-code">
-<!--              <p th:text="${air}"}></p>-->
-                <p th:text="${toLoc}"></p></div>
-
+                <span th:text="${air}"></span>
             </div>
             <div class="dep-arr-label">
                 Departing
@@ -43,10 +42,11 @@
         </div>
         <div class="airport">
             <div class="airport-name">
-                Tampa
+                <span th:text="${flight.toLocation}"></span>
+
             </div>
             <div class="airport-code">
-                TPA
+                <span th:text="${airp}"></span>
             </div>
             <div class="dep-arr-label">
                 Arriving
