@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static com.team.flights.Controllers.JosephController.setNameData;
@@ -52,6 +53,26 @@ public class JustinController {
                                      @RequestParam(value = "expirationdate", required = false) String expirationdate,
                                      @RequestParam(name = "id", required = false) long id,
                                      Model model, Principal principal) {
+        boolean error = false;
+        creditcardnumber = creditcardnumber.replace("-", "");
+        if (creditcardnumber.length() != 16) {
+            error = true;
+        } else if (cvv.length() != 3) {
+            error = true;
+        } else if (name.length() <= 2) {
+            error = true;
+        } else if (expirationdate.length() <= 2) {
+            error = true;
+        }
+        if (error) {
+            model.addAttribute("id", id);
+            model.addAttribute("error", "Incorrect credit card information");
+            model.addAttribute("name", name);
+            model.addAttribute("creditcardnumber", creditcardnumber);
+            model.addAttribute("cvv", cvv);
+            model.addAttribute("expirationdate", expirationdate);
+            return "creditcard";
+        }
         User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
         model.addAttribute("toLoc", flightRepository.findById(trip.getFlightToId()).getToLocation());
@@ -116,7 +137,12 @@ public class JustinController {
     //------------------------------------------------------------------------------------------------------------------
     @RequestMapping("/admin")
     public String adminPage(Model model) {
-        model.addAttribute("flight", new Flight());
+        Flight flight = new Flight();
+        flight.setDate(LocalDate.now().toString());
+        model.addAttribute("flight", flight);
+        model.addAttribute("flightsto", TravelHelper.getToLocations(flightRepository.findAll()));
+        model.addAttribute("flightsfrom", TravelHelper.getFromLocations(flightRepository.findAll()));
+        model.addAttribute("date", LocalDate.now());
         return "admin";
     }
 
