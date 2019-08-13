@@ -6,20 +6,20 @@ body {
 
 .ticket {
     display: inline-block;
-    width: 350px;
-    margin: 20px;
+    width: 450px;
+    margin: 30px;
     background-color: #273138;
     border-radius: 10px;
     color: #fff;
     font-family: Helvetica Neue;
     font-weight: 300;
-    letter-spacing: 1px;
+    letter-spacing: 3px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .ticket header {
     position: relative;
-    height: 35px;
+    height: 60px;
     background-color: #1B252E;
     padding: 10px;
     border-radius: 10px;
@@ -141,9 +141,9 @@ body {
 }
 
 .ticket .place {
-    padding: 10px;
+    padding: 40px;
     text-align: center;
-    height: 330px;
+    height: 400px;
 }
 
 .ticket .place-block {
