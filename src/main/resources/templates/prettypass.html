@@ -9,8 +9,10 @@
 
 </head>
 <body>
+<div th:replace="base::nav"></div>
+
 <div class="ticket">
-<!--    <form action="#" th:action = "@{/prettypass}" method="post">-->
+    <!--    <form action="#" th:action = "@{/prettypass}" method="post">-->
     <header>
         <div class="company-name">
             American Airlines
@@ -82,7 +84,8 @@
             </div>
         </div>
         <div class="qr">
-            <img src="http://www.classtools.net/QR/pics/qr.png"/>
+            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=localhost:8080/viewTicket/'
+                + ${id}"/>
         </div>
     </section>
 </div>
@@ -103,22 +106,6 @@
     <section class="airports">
         <div class="airport">
             <div class="airport-name">
-                <span th:text="${flight.fromLocation}"></span>
-
-            </div>
-            <div class="airport-code">
-                <span th:text="${air}"></span>
-
-            </div>
-            <div class="dep-arr-label">
-                Departing
-            </div>
-            <div class="time">
-                <span th:text="${depTime}"></span>
-            </div>
-        </div>
-        <div class="airport">
-            <div class="airport-name">
                 <span th:text="${flight.toLocation}"></span>
 
             </div>
@@ -127,10 +114,26 @@
 
             </div>
             <div class="dep-arr-label">
+                Departing
+            </div>
+            <div class="time">
+                <span th:text="${flightReturn.departingTime}"></span>
+            </div>
+        </div>
+        <div class="airport">
+            <div class="airport-name">
+                <span th:text="${flight.fromLocation}"></span>
+
+            </div>
+            <div class="airport-code">
+                <span th:text="${air}"></span>
+
+            </div>
+            <div class="dep-arr-label">
                 Arriving
             </div>
             <div class="time">
-                <span th:text="${aTime}"></span>
+                <span th:text="${flightReturn.arrivalTime}"></span>
             </div>
         </div>
     </section>
@@ -160,10 +163,13 @@
             </div>
         </div>
         <div class="qr">
-            <img src="http://www.classtools.net/QR/pics/qr.png"/>
+            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=localhost:8080/viewTicket/'
+                + ${id}"/>
         </div>
     </section>
 </div>
+<div th:replace="base :: footer"></div>
+
 <!--</form>-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
