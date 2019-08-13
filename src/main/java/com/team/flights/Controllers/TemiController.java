@@ -170,6 +170,35 @@ public class TemiController {
         map.put("Washington DC", "DCA");
         map.put("Baltimore", "BWI");
         map.put("New York", "JFK");
+
+        map.put("Los Angeles","LAX");
+        map.put( "Detroit", "DTW");
+        map.put("Portland" , "PTX");
+        map.put("Salt Lake City","SLC" );
+        map.put( "Paris", "CDG");
+        map.put("Warsaw", "WAW" );
+        map.put("Lisbon", "LIS" );
+        map.put("Madrid","MAD" );
+        map.put( "London", "LCA");
+        map.put( "Rome", "FCO");
+        map.put("Athens", "ATH" );
+        map.put( "Berlin", "BER");
+        map.put( "Stockholm", "ARN");
+        map.put("Tokyo" , "HND");
+        map.put("Bern", "BRN" );
+        map.put( "Moscow", "DME");
+        map.put( "Amsterdam", "AMS");
+        map.put( "Hong Kong", "HKG");
+        map.put("Seoul", "ICN" );
+        map.put( "New Delhi", "DEL");
+        map.put("Beijing", "PEK" );
+        map.put(  "Sydney", "SYD");
+        map.put("Wellington", "WLG" );
+        map.put( "Boston","BOS");
+
+
+
+
         System.out.println("map = " + map);
         return map;
 
@@ -182,13 +211,20 @@ public class TemiController {
         Flight flightDeparture = flightRepository.findById(trip.getFlightToId());
         Flight flightReturn = flightRepository.findById(trip.getFlightFromId());
         HashMap <String, String> map=getHashMap();
-        String airport = map.get(flightDeparture.getFromLocation()) ;
+        String airport = map.get(flightDeparture.getFromLocation());
         String airpotto = map.get(flightDeparture.getToLocation());
+        String arrivalTime= flightDeparture.getArrivalTime();
+        String depTime= flightDeparture.getDepartingTime();
+        String depTime2= flightDeparture.getDepartingTime();
+
+
         model.addAttribute("air", airport);
         model.addAttribute("airp", airpotto);
         model.addAttribute("flight", flightDeparture);
+        model.addAttribute("aTime", arrivalTime);
+
+        model.addAttribute("depTime", depTime);
         model.addAttribute("flightReturn", flightReturn);
-        model.addAttribute("id", id);
 
         return "prettypass";
     }

@@ -9,6 +9,10 @@ public interface FlightRepository extends CrudRepository<Flight,Long> {
 
     Iterable<Flight> findAllByToLocation(String tolocation);
     Iterable<Flight> findAllByFromLocation(String fLocation);
+    Iterable<Flight> findAllByArrivalTime(String arrivalTime);
+    Iterable<Flight> findAllByDepartingTime(String depTime);
+
+
 
     ArrayList<Flight> findAll();
 //    ArrayList<Flight> findAllByToLocation(String tolocation);

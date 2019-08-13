@@ -37,7 +37,7 @@
                 Departing
             </div>
             <div class="time">
-                7:45am
+                <span th:text="${depTime}"></span>
             </div>
         </div>
         <div class="airport">
@@ -52,7 +52,7 @@
                 Arriving
             </div>
             <div class="time">
-                9:15am
+                <span th:text="${aTime}"></span>
             </div>
         </div>
     </section>
@@ -105,29 +105,33 @@
         <div class="airport">
             <div class="airport-name">
                 <span th:text="${flight.toLocation}"></span>
+
             </div>
             <div class="airport-code">
                 <span th:text="${airp}"></span>
+
             </div>
             <div class="dep-arr-label">
                 Departing
             </div>
             <div class="time">
-                7:45am
+                <span th:text="${flightReturn.departingTime}"></span>
             </div>
         </div>
         <div class="airport">
             <div class="airport-name">
                 <span th:text="${flight.fromLocation}"></span>
+
             </div>
-            <div th:text="${air}" class="airport-code">
+            <div class="airport-code">
                 <span th:text="${air}"></span>
+
             </div>
             <div class="dep-arr-label">
                 Arriving
             </div>
             <div class="time">
-                9:15am
+                <span th:text="${flightReturn.arrivalTime}"></span>
             </div>
         </div>
     </section>
@@ -157,7 +161,7 @@
             </div>
         </div>
         <div class="qr">
-            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=localhost:8080/viewTicket/'
+            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=localhost:8080/viewTicket/'
                 + ${id}"/>
         </div>
     </section>
