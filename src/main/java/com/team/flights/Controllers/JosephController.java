@@ -136,6 +136,14 @@ public class JosephController {
     public String addName(@RequestParam(name = "id") long id, Principal principal, Model model) {
         User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
+        Flight to = flightRepository.findById(trip.getFlightToId());
+        Flight from = flightRepository.findById(trip.getFlightFromId());
+        if (to != null) {
+            to.setAvailableSeats(to.getAvailableSeats() - trip.getPassengers());
+        }
+        if (from != null) {
+            from.setAvailableSeats(from.getAvailableSeats() - trip.getPassengers());
+        }
         trip.setUserId(user.getId());
         tripRepository.save(trip);
         return "redirect:/boardingPass";
