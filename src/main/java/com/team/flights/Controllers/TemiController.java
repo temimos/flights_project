@@ -208,8 +208,8 @@ public class TemiController {
     @RequestMapping("/viewTicket/{id}")
     public String viewTicket(@PathVariable("id") long id, Principal principal, Model model) {
         Trip trip = tripRepository.findById(id);
-        Flight flightDeparture = flightRepository.findById(trip.getFlightToId());
-        Flight flightReturn = flightRepository.findById(trip.getFlightFromId());
+        Flight flightDeparture = flightRepository.findById(trip.getFlightFromId());
+        Flight flightReturn = flightRepository.findById(trip.getFlightToId());
         HashMap <String, String> map=getHashMap();
         String airport = map.get(flightDeparture.getFromLocation());
         String airpotto = map.get(flightDeparture.getToLocation());

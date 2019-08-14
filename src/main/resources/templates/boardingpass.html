@@ -29,12 +29,12 @@
                     ${trip.creditCard.split(', ')[1].substring(12)}"></td>
             <td th:if="${trip.creditCard.split(', ')[1].length()} < 16"
                 th:text="'Unknown Credit Card'"></td>
-            <td th:if="${trip.flightFromId} != 0">
+            <td th:if="${trip.flightToId} != 0">
                 <p th:text="'Roundtrip'"></p>
                 <p th:text="'Depart Date: ' + ${from.get(trip.flightFromId)}"></p>
                 <p th:text="'Return Date: ' + ${to.get(trip.flightToId)}"></p>
             </td>
-            <td th:if="${trip.flightFromId} == 0" >
+            <td th:if="${trip.flightToId} == 0" >
                 <p th:text="'One-way Flight'"></p>
                 <p th:text="'Depart Date: ' + ${from.get(trip.flightFromId)}"></p>
             </td>

@@ -75,8 +75,8 @@ public class JustinController {
         }
         User user = ((CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser();
         Trip trip = tripRepository.findById(id);
-        model.addAttribute("toLoc", flightRepository.findById(trip.getFlightToId()).getToLocation());
-        model.addAttribute("fromLoc", flightRepository.findById(trip.getFlightToId()).getFromLocation());
+        model.addAttribute("toLoc", flightRepository.findById(trip.getFlightFromId()).getToLocation());
+        model.addAttribute("fromLoc", flightRepository.findById(trip.getFlightFromId()).getFromLocation());
         String data = name + ", " + creditcardnumber + ", " + cvv + ", " + expirationdate;
         model.addAttribute("trips", trip);
         trip.setCreditCard(data);
@@ -108,7 +108,12 @@ public class JustinController {
                                 @RequestParam(name = "on", required = false) String on, Model model, Principal principal) {
         Trip trip = tripRepository.findById(tripId);
 
-        if (on.equals("Departure")) {
+        if (on.startsWith("One-Way")) {
+            trip.setFlightFromId(id);
+            tripRepository.save(trip);
+            model.addAttribute("id", trip.getId());
+            return setNameData(model, trip, tripRepository);
+        } else if (on.equals("Departure")) {
             trip.setFlightFromId(id);
             tripRepository.save(trip);
 
