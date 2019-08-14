@@ -35,13 +35,13 @@
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
-                <div class="card m-2" style="width: 15rem;" th:each="person : ${persons}">
+                <div class="card m-2" style="width: 15rem;">
                     <div class="card-header bg-dark text-white">Passengers</div>
                     <br>
                     <div class="card-body">
-                        <div class="panel-heading"><span th:text="${person.name}"></span>
-                            <br>
-                        </div>
+                        <div class="panel-heading" th:each="person : ${persons}">
+                            <span th:text="${person.name}"></span>
+                        </div><br>
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------------------------------------------>
