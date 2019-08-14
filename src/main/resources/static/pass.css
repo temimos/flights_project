@@ -46,9 +46,9 @@ body {
     height: 16px;
     background-color: #fff;
     position: absolute;
-    bottom: -8px;
+    bottom: -18px;
     right: -8px;
-    border-radius: 50%;
+    border-radius: 150%;
     box-shadow: inset 12px 0px 18px -11px rgba(0, 0, 0, 0.5);
 }
 
@@ -66,7 +66,7 @@ body {
 
 .ticket .airports {
     padding: 5px 10px 10px 10px;
-    height: 100px;
+    height: 175px;
     text-align: center;
     position: relative;
     border-bottom: 2px dashed #000;
@@ -74,7 +74,7 @@ body {
 
 .ticket .airports .airport {
     position: relative;
-    margin: 10px;
+    margin: 20px;
     text-align: center;
     display: inline-block;
 }
