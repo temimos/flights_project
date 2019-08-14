@@ -9,13 +9,14 @@
 
 </head>
 <body style="background-image: url('https://images4.alphacoders.com/528/thumb-1920-52896.jpg'); background-repeat: no-repeat; background-size: cover;">
- x<div th:replace="base::nav"></div>
+ <div th:replace="base::nav"></div>
 
+ <div th:each="name : ${names}">
 <div class="ticket">
     <!--    <form action="#" th:action = "@{/prettypass}" method="post">-->
     <header>
         <div class="company-name">
-            American Airlines
+            Mushroom Airlines - <span th:text="${name.name}"></span>
         </div>
         <div class="gate">
             <div>
@@ -84,15 +85,15 @@
             </div>
         </div>
         <div class="qr">
-            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=localhost:8080/viewTicket/'
-                + ${id}"/>
+            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' +
+                ${#httpServletRequest.requestURL}"/>
         </div>
     </section>
 </div>
 <div class="ticket inverse" th:if="${flightReturn} != null">
     <header>
         <div class="company-name">
-            American Airlines
+            Mushroom Airlines - <span th:text="${name.name}"></span>
         </div>
         <div class="gate">
             <div>
@@ -163,11 +164,12 @@
             </div>
         </div>
         <div class="qr">
-            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=localhost:8080/viewTicket/'
-                + ${id}"/>
+            <img th:src="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' +
+                ${#httpServletRequest.requestURL}"/>
         </div>
     </section>
 </div>
+ </div>
 <div th:replace="base :: footer"></div>
 
 <!--</form>-->

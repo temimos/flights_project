@@ -166,8 +166,8 @@ body {
 }
 
 .ticket .qr {
-    width: 220px;
-    height: 220px;
+    width: 150px;
+    height: 150px;
     margin: 20px auto;
     border-radius: 10px;
     overflow: hidden;

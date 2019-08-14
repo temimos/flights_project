@@ -1,6 +1,7 @@
 package com.team.flights.Controllers;
 
 import com.team.flights.Beans.Flight;
+import com.team.flights.Beans.Person;
 import com.team.flights.Beans.Trip;
 import com.team.flights.Beans.User;
 import com.team.flights.CustomUserDetails;
@@ -225,6 +226,9 @@ public class TemiController {
 
         model.addAttribute("depTime", depTime);
         model.addAttribute("flightReturn", flightReturn);
+
+        ArrayList<Person> names = personRepository.findAllByTripId(trip.getId());
+        model.addAttribute("names", names);
 
         return "prettypass";
     }
