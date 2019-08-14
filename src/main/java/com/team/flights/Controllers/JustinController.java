@@ -83,7 +83,7 @@ public class JustinController {
         model.addAttribute("users", user);
         model.addAttribute("id", trip.getId());
         model.addAttribute("classMap", TravelHelper.getClassMap());
-        model.addAttribute("persons", personRepository.findAll());
+        model.addAttribute("persons", personRepository.findAllByTripId(trip.getId()));
         tripRepository.save(trip);
         return "finalize";
     }
